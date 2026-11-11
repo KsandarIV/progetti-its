@@ -8,6 +8,10 @@ Una web app in Google Apps Script collegata a un foglio Google:
 - **calcolo automatico** delle colonne derivate nel foglio;
 - grafica scura "neon", pensata per l'uso da telefono.
 
+| Calendario del mese | Scelta del percorso | Dati di una tratta |
+|---|---|---|
+| ![Calendario](img/calendario.png) | ![Percorsi](img/percorsi.png) | ![Tratta](img/tratta.png) |
+
 ## Struttura
 - `app/*.gs`: backend (servizi sul foglio, calcoli, configurazione)
 - `app/*.html`: interfaccia (HTML, CSS, JS)
