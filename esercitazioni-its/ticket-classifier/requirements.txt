@@ -1,0 +1,6 @@
+pandas>=2.0
+scikit-learn>=1.4
+spacy>=3.7
+ollama>=0.4
+openai>=1.0
+ 

@@ -1,0 +1,79 @@
+{
+  "categorie": {
+    "Anagrafe Assistiti": {
+      "descrizione": "Anagrafica dei cittadini assistiti dal SSR: scelta/revoca del medico, dati anagrafici, esenzioni, iscrizione al SSR, duplicati.",
+      "sottocategorie": {
+        "Scelta/revoca medico": "Assegnazione, cambio o revoca del MMG/PLS",
+        "Variazione dati anagrafici": "Correzione o aggiornamento di dati dell'assistito (nome, residenza, ecc.)",
+        "Esenzioni e iscrizione SSR": "Registrazione o visualizzazione di esenzioni, iscrizione SSR, STP/ENI",
+        "Duplicati e unificazione posizioni": "Schede doppie o CF provvisori da unificare"
+      }
+    },
+    "Anagrafe delle Strutture": {
+      "descrizione": "Anagrafe di ospedali, ambulatori, RSA, farmacie, laboratori e altre strutture: censimento, variazioni, accreditamento, cessazione.",
+      "sottocategorie": {
+        "Censimento nuova struttura": "Inserimento di una struttura non ancora presente",
+        "Variazione dati struttura": "Modifica di dati (indirizzo, PEC, direttore, codici) o correzione di doppioni",
+        "Accreditamento e convenzioni": "Stato di accreditamento, decreti, contratti e budget",
+        "Cessazione struttura": "Chiusura o disattivazione di una struttura"
+      }
+    },
+    "Personale Sanitario": {
+      "descrizione": "Anagrafe e stato professionale degli operatori sanitari (medici, infermieri, ecc.): censimento, incarichi/sedi, cessazioni/sospensioni.",
+      "sottocategorie": {
+        "Censimento operatore": "Inserimento di un nuovo operatore",
+        "Variazione incarico o sede": "Cambio di sede, qualifica, massimale o incarico",
+        "Cessazione o sospensione": "Fine rapporto, pensionamento, sospensione dall'albo"
+      }
+    },
+    "Farmaceutica": {
+      "descrizione": "Farmaci, prontuario, piani terapeutici, DPC, dispensazione e magazzini farmaceutici.",
+      "sottocategorie": {
+        "Prontuario e codici farmaco": "Farmaci mancanti o errati nel prontuario/catalogo (AIC, ATC)",
+        "Piani terapeutici e DPC": "Piani terapeutici e distribuzione per conto",
+        "Dispensazione e magazzino": "Registrazione della dispensazione, giacenze, carenze"
+      }
+    },
+    "Ricette": {
+      "descrizione": "Ricette (dematerializzate e non): emissione, stato, visualizzazione, annullamento, blocchi prescrittivi.",
+      "sottocategorie": {
+        "Errore emissione, stato o visualizzazione": "NRE non generato, ricetta non visibile, stato incoerente, stampa promemoria",
+        "Annullamento e rettifica": "Annullare o correggere una ricetta già emessa",
+        "Blocchi prescrittivi e regole": "Blocchi per appropriatezza (RAO), farmaci sospesi, regole di prescrivibilità"
+      }
+    },
+    "Assistenza Territoriale": {
+      "descrizione": "Servizi territoriali: ADI, presa in carico/cronicità/PDTA, dimissioni protette, strutture residenziali e semiresidenziali.",
+      "sottocategorie": {
+        "Assistenza domiciliare (ADI)": "Attivazione, sospensione, registrazione accessi ADI",
+        "Presa in carico e cronicità": "PDTA, piani assistenziali, dimissioni protette",
+        "Strutture residenziali e semiresidenziali": "Ingressi RSA, graduatorie, centri diurni, presenze"
+      }
+    },
+    "Utente (accessi, credenziali, profili)": {
+      "descrizione": "Accesso al sistema: credenziali, profili e utenze degli utilizzatori (non lo stato professionale dell'operatore).",
+      "sottocategorie": {
+        "Reset password": "Password dimenticata/scaduta, link di ripristino",
+        "Abilitazione profilo": "Assegnazione o modifica di profili/permessi",
+        "Disattivazione utenza": "Blocco o chiusura di account",
+        "Autenticazione e SPID": "SPID, OTP, loop di login, doppio fattore"
+      }
+    },
+    "Flussi Informativi": {
+      "descrizione": "Flussi di dati verso Regione/Ministero e relativa qualità, scarti, dashboard e reportistica. Prevale su altre categorie quando il problema riguarda l'incoerenza/invio/aggregazione dei dati.",
+      "sottocategorie": {
+        "Qualità e coerenza dei dati": "Dati incoerenti o incompleti prima/dopo l'invio",
+        "Invio e scarti flussi": "Flussi NSIS/SDO/specialistica inviati, mancanti o scartati",
+        "Reportistica e dashboard": "Cruscotti non aggiornati, richieste di report"
+      }
+    }
+  },
+  "fallback": "Da verificare",
+  "regole_priorita": [
+    "Se il problema riguarda incoerenze di dati aggregati o inviati a Regione/Ministero -> Flussi Informativi, anche se si cita farmaceutica, ricette ecc.",
+    "Se l'oggetto è l'accesso/credenziali/profilo di una persona -> Utente; se è lo stato professionale (albo, incarico) -> Personale Sanitario.",
+    "In caso di più problemi, la categoria gold è quella del problema principale/bloccante (il primo indicato se pari importanza).",
+    "Se la richiesta non è un problema IT classificabile o è troppo generica -> Da verificare.",
+    "Una farmacia/ambulatorio come entità anagrafica -> Anagrafe delle Strutture; la dispensazione -> Farmaceutica."
+  ]
+}

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Odyssey Engine V4</title>
+  <?!= include('CSS'); ?>
+</head>
+<body class="dark-theme">
+
+  <header class="app-header">
+    <div class="header-content">
+      <span class="status-indicator online" id="conn-status" title="Connesso"></span>
+      <h1>ODYSSEY ENGINE V4</h1>
+      <span style="font-size: 16px;">🚇</span>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <div id="toast-container" class="toast-container"></div>
+
+    <div id="loading-overlay" class="loading-overlay hidden">
+      <div class="spinner"></div>
+      <p id="loading-text">Sincronizzazione in corso...</p>
+    </div>
+
+    <!-- ================= SCHERMATA 1: HOME (CALENDARIO) ================= -->
+    <section id="step-home" class="fade-in">
+      
+      <div class="month-toggle-container">
+        <label class="switch-neon">
+          <input type="checkbox" id="month-auto-toggle" checked>
+          <span class="slider-neon">
+            <span class="slider-text on">AUTO</span>
+            <span class="slider-text off">MANUALE</span>
+          </span>
+        </label>
+        <div id="current-month-display" class="neon-text-cyan">Giugno</div>
+      </div>
+
+      <div class="calendar-wrapper">
+        <div class="calendar-grid" id="calendar-grid">
+          <!-- Generato da JS: 28 quadrati + 3 rettangoli -->
+        </div>
+      </div>
+
+      <button id="btn-edit-dataset" class="btn btn-dataset w-100 mt-4">
+        MODIFICA DATASET
+      </button>
+
+    </section>
+
+    <!-- ================= SCHERMATA 2: ROUTING (SELEZIONA PERCORSO) ================= -->
+    <section id="step-routing" class="hidden">
+      
+      <div class="routing-header">
+        <div class="top-bar">
+          <button id="btn-back-home" class="btn-icon neon-orange">←</button>
+          <button id="btn-go-home" class="btn-icon neon-cyan">🏠</button>
+        </div>
+        
+        <div class="date-display">
+          <span class="date-left neon-orange" id="route-day-type">OGGI:</span>
+          <span class="date-right neon-cyan" id="route-date-val">--.--.----</span>
+        </div>
+        <div class="date-subtitle" id="route-day-name">Lunedì</div>
+      </div>
+
+      <h2 class="title-centered mt-4 neon-orange">SELEZIONA PERCORSO</h2>
+
+      <div id="templates-container" class="routes-container mt-4">
+        <!-- Generati da JS -->
+        <div style="text-align:center; font-size:11px; color:var(--text-muted);">In caricamento...</div>
+      </div>
+
+      <button id="btn-custom-route" class="btn btn-slim-orange w-100 mt-4">
+        ➕ TRATTA PERSONALIZZATA
+      </button>
+    </section>
+
+    <!-- ================= SCHERMATA 3.1: TRACCIAMENTO ================= -->
+    <section id="step-tracking" class="hidden">
+      
+      <div class="tracking-header mb-4">
+        <div class="top-bar">
+          <button id="btn-back-routing" class="btn-icon neon-orange">←</button>
+          <button id="btn-go-home-track" class="btn-icon neon-cyan">🏠</button>
+        </div>
+        
+        <div class="tratta-banner border-cyan mt-2">
+          <div class="tratta-progress" id="tratta-progress">1/1</div>
+          <div class="tratta-name" id="tratta-name">Casa → ITS</div>
+        </div>
+      </div>
+
+      <form id="segment-form">
+        <input type="hidden" id="route" name="route">
+        <input type="hidden" id="transport" name="transport">
+        <input type="hidden" id="cambi" name="cambi" value="0">
+        <input type="hidden" id="delay_reason" name="delay_reason">
+        <input type="hidden" id="notes" name="notes">
+
+        <!-- TIME BOXES (1x2 + 1) -->
+        <div class="time-boxes-container mb-4">
+          <div class="time-boxes-row">
+            <div class="time-box square" id="box-partenza" data-target="i_eff">
+              <div class="tb-label">ORA PARTENZA</div>
+              <input type="text" id="i_eff" name="i_eff" class="tb-input" placeholder="--:--" readonly>
+            </div>
+            
+            <div class="time-box square" id="box-arrivo" data-target="l_arr">
+              <div class="tb-label">ORA ARRIVO</div>
+              <input type="text" id="l_arr" name="l_arr" class="tb-input" placeholder="--:--" readonly>
+            </div>
+          </div>
+          
+          <div class="time-box rect mt-2 border-primary" id="box-prossimo" data-target="n_pros">
+            <div class="tb-label text-primary">ORA PROSSIMO MEZZO</div>
+            <input type="text" id="n_pros" name="n_pros" class="tb-input text-primary" placeholder="--:--" readonly>
+          </div>
+        </div>
+
+        <!-- OPZIONI 2x2 -->
+        <div class="options-grid-2x2 mb-4">
+          <div class="opt-box square" id="btn-opt-crowd">
+            <div class="opt-icon">👥</div>
+            <div class="opt-label">Affollamento</div>
+            <div class="opt-val" id="val-crowd">-</div>
+            <input type="hidden" id="crowding" name="crowding">
+          </div>
+          
+          <div class="opt-box square" id="btn-opt-seat">
+            <div class="opt-icon">💺</div>
+            <div class="opt-label">Sedile</div>
+            <div class="opt-val" id="val-seat">OFF</div>
+            <div class="mini-switch">
+              <label class="switch-small" onclick="event.stopPropagation();">
+                <input type="checkbox" id="seat_avail" name="seat_avail">
+                <span class="slider-small"></span>
+              </label>
+            </div>
+            <input type="hidden" id="sitting" name="sitting" value="FALSE">
+          </div>
+
+          <div class="opt-box square" id="btn-opt-audio">
+            <div class="opt-icon">🎧</div>
+            <div class="opt-label">Cuffie</div>
+            <div class="opt-val" id="val-audio">0%</div>
+            <input type="hidden" id="audio" name="audio" value="0%">
+          </div>
+          
+          <div class="opt-box square" id="btn-opt-mood">
+            <div class="opt-icon">🧠</div>
+            <div class="opt-label">Mood</div>
+            <div class="opt-val" id="val-mood" style="font-size:10px;">-</div>
+            <input type="hidden" id="mood" name="mood">
+          </div>
+        </div>
+
+        <!-- NAVIGAZIONE TRATTE -->
+        <div class="tratta-nav-footer mt-4">
+          <button type="button" id="btn-tratta-prev" class="btn btn-nav prev" disabled>◀ PREC</button>
+          <button type="button" id="btn-tratta-next" class="btn btn-nav next">PROSSIMA ▶</button>
+        </div>
+
+        <button type="submit" id="btn-save" class="hidden">Salva</button>
+
+      </form>
+    </section>
+
+  </main>
+
+  <!-- ================= POP-UPS E MODALI ================= -->
+  
+  <div id="modal-overlay" class="modal-overlay hidden">
+    
+    <!-- RUOTA ORARIA (Wheel Picker) -->
+    <div id="modal-time-wheel" class="modal-content bottom-sheet hidden">
+      <div class="modal-header">
+        <h3 class="neon-cyan">Imposta Orario</h3>
+        <button class="btn-close">✕</button>
+      </div>
+      <!-- Indicatore centrale (riga attiva) -->
+      <div class="wheel-frame">
+        <div class="wheel-indicator"></div>
+        <div class="wheel-picker">
+          <div class="wheel-col highlight" id="wheel-h-col">
+            <div class="wheel-strip" id="wheel-h-strip"></div>
+          </div>
+          <div class="wheel-sep">:</div>
+          <div class="wheel-col highlight" id="wheel-m-col">
+            <div class="wheel-strip" id="wheel-m-strip"></div>
+          </div>
+        </div>
+        <div class="wheel-fade top"></div>
+        <div class="wheel-fade bottom"></div>
+      </div>
+      <div class="wheel-hint">↕ scorri o tocca per cambiare</div>
+      <button class="btn btn-primary w-100 mt-4" id="btn-confirm-time">CONFERMA</button>
+    </div>
+
+    <!-- MESE SLIDER -->
+    <div id="modal-month" class="modal-content bottom-sheet hidden">
+      <div class="modal-header">
+        <h3 class="neon-cyan" id="month-slider-title">Mese</h3>
+        <button class="btn-close">✕</button>
+      </div>
+      <div class="month-slider-container">
+        <input type="range" id="month-slider" min="1" max="12" value="1">
+        <div class="month-labels">
+          <span>1</span><span>12</span>
+        </div>
+      </div>
+      <button class="btn btn-primary w-100 mt-4" id="btn-confirm-month">CONFERMA</button>
+    </div>
+
+    <!-- WIP (Work In Progress) -->
+    <div id="modal-wip" class="modal-content center-box hidden">
+      <div class="wip-box">
+        <div class="wip-emoji">🚧</div>
+        <div class="wip-title" id="wip-title">Disponibile prossimamente</div>
+        <div class="wip-text" id="wip-text">Questa funzionalità è in fase di sviluppo.</div>
+        <button class="btn btn-primary w-100" id="btn-wip-close">HO CAPITO</button>
+      </div>
+    </div>
+
+    <!-- AFFOLLAMENTO POPUP -->
+    <div id="modal-crowd" class="modal-content bottom-sheet hidden">
+      <div class="modal-header">
+        <h3 class="neon-cyan">Affollamento</h3>
+        <button class="btn-close">✕</button>
+      </div>
+      <div class="array-tracker mb-2" id="tracker-crowd">Valori: nessuno</div>
+      <div class="btn-grid-5" id="grid-modal-crowd">
+        <button class="opt-btn-large">1</button>
+        <button class="opt-btn-large">2</button>
+        <button class="opt-btn-large">3</button>
+        <button class="opt-btn-large">4</button>
+        <button class="opt-btn-large">5</button>
+      </div>
+      <button class="btn btn-primary w-100 mt-4" id="btn-confirm-crowd">FATTO</button>
+    </div>
+
+    <!-- SEDUTO POPUP -->
+    <div id="modal-sitting" class="modal-content center-box hidden">
+      <h3 class="neon-cyan text-center mb-4">Ti sei seduto?</h3>
+      <div class="btn-grid-2">
+        <button class="btn btn-outline-cyan w-100" id="btn-sit-yes">SÌ</button>
+        <button class="btn btn-outline-orange w-100" id="btn-sit-no">NO</button>
+      </div>
+    </div>
+
+    <!-- MOOD POPUP -->
+    <div id="modal-mood" class="modal-content full-screen hidden">
+      <div class="modal-header sticky">
+        <h3 class="neon-cyan">Mood</h3>
+        <button class="btn-close">✕</button>
+      </div>
+      <div class="array-tracker sticky-tracker mb-4" id="tracker-mood">Mood: -</div>
+      <div class="mood-grid-large" id="grid-modal-mood">
+        <!-- Generato da JS -->
+      </div>
+      <button class="btn btn-primary w-100 mt-4 sticky-bottom" id="btn-confirm-mood">FATTO</button>
+    </div>
+
+  </div>
+
+  <?!= include('JS'); ?>
+</body>
+</html>

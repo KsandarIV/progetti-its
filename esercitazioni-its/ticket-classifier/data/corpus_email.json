@@ -1,0 +1,623 @@
+[
+  {
+    "id": "E001",
+    "testo_email": "Buonasera, sto tentando di effettuare la scelta del medico di base per RSSMRA80A01H501U ma il sistema è bloccato. Restituisce un errore 'E542 - permessi insufficienti'. Potete controllare?",
+    "categoria_gold": "Anagrafe Assistiti",
+    "sottocategoria_gold": "Scelta/revoca medico",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": "Esempio della traccia"
+  },
+  {
+    "id": "E002",
+    "testo_email": "Gentili, la signora Bianchi Lucia (CF BNCLCU45C50H501Z) risulta ancora assegnata al dott. Verdi, deceduto lo scorso mese. Non riusciamo a revocare il medico per riassegnarne uno nuovo. Grazie.\nSegreteria Distretto 3",
+    "categoria_gold": "Anagrafe Assistiti",
+    "sottocategoria_gold": "Scelta/revoca medico",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E003",
+    "testo_email": "Il cognome di un assistito è stato registrato con un errore di battitura (Rosi invece di Rossi), CF RSSGNN72M10H501K. Come lo correggiamo? Il sistema non ci fa modificare il campo.",
+    "categoria_gold": "Anagrafe Assistiti",
+    "sottocategoria_gold": "Variazione dati anagrafici",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E004",
+    "testo_email": "buongiorno cambio residenza da Roma a Frosinone, l'anagrafe assistiti mi mostra ancora l'indirizzo vecchio, dovrei aggiornare. mio tel 333 1234567 grazie",
+    "categoria_gold": "Anagrafe Assistiti",
+    "sottocategoria_gold": "Variazione dati anagrafici",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E005",
+    "testo_email": "Un paziente straniero con permesso di soggiorno scaduto necessita di cure urgenti e chiede l'iscrizione al SSR con codice STP. Non troviamo la voce in anagrafe per inserirlo. Potete indicarci la procedura nel sistema?",
+    "categoria_gold": "Anagrafe Assistiti",
+    "sottocategoria_gold": "Esenzioni e iscrizione SSR",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E006",
+    "testo_email": "Salve, l'esenzione per patologia 048 della paziente Conti Marta (CF CNTMRT58H55L219T) non compare più a sistema, eppure è stata rilasciata a marzo. Non riesce a ritirare i farmaci senza ticket.",
+    "categoria_gold": "Anagrafe Assistiti",
+    "sottocategoria_gold": "Esenzioni e iscrizione SSR",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": "Cita farmaci ma il problema è l'esenzione in anagrafe"
+  },
+  {
+    "id": "E007",
+    "testo_email": "Abbiamo individuato due schede per lo stesso assistito: una con CF RSSLRA60D45F205X e una con CF provvisorio. Chiediamo l'unificazione delle posizioni.",
+    "categoria_gold": "Anagrafe Assistiti",
+    "sottocategoria_gold": "Duplicati e unificazione posizioni",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E008",
+    "testo_email": "Buongiorno, scrivo per due cose. 1) Il sig. Ferri Paolo risulta con due posizioni anagrafiche (CF FRRPLA70B12H501Q e un codice provvisorio) e vorremmo unificarle. 2) Inoltre la mia password per il portale scade domani, mi servirà un ripristino. Grazie.\n\n--\nDott.ssa Elena Marchetti\nDirigente Amministrativo - U.O.C. Servizi Sanitari Territoriali\nAzienda Sanitaria Locale Roma 9\nVia delle Magnolie 21, 00100 Roma | Tel. 06 1234567 | Cell. 339 8765432\nemail: elena.marchetti@asl-esempio.it\n\nAVVISO DI RISERVATEZZA: Il presente messaggio e gli eventuali allegati sono destinati esclusivamente al destinatario e possono contenere informazioni riservate. Se lo ha ricevuto per errore, lo cancelli e ne dia comunicazione al mittente (D.Lgs. 196/2003, Reg. UE 2016/679).",
+    "categoria_gold": "Anagrafe Assistiti",
+    "sottocategoria_gold": "Duplicati e unificazione posizioni",
+    "difficolta": "difficile",
+    "tipo_difficolta": "multi-problema; firma lunga; disclaimer",
+    "note_etichettatura": "Principale: duplicati (primo punto); secondario: reset password"
+  },
+  {
+    "id": "E009",
+    "testo_email": "Apriamo un nuovo poliambulatorio privato a Latina (via Appia 100). Come lo inseriamo nell'anagrafe delle strutture? Abbiamo già il codice STS11, ci serve il resto della procedura.",
+    "categoria_gold": "Anagrafe delle Strutture",
+    "sottocategoria_gold": "Censimento nuova struttura",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E010",
+    "testo_email": "Struttura non trovata nel menu a tendina, dobbiamo registrare ambulatorio",
+    "categoria_gold": "Anagrafe delle Strutture",
+    "sottocategoria_gold": "Censimento nuova struttura",
+    "difficolta": "difficile",
+    "tipo_difficolta": "molto breve",
+    "note_etichettatura": "Testo sintetico ma chiaro"
+  },
+  {
+    "id": "E011",
+    "testo_email": "La nostra RSA ha cambiato PEC e direttore sanitario; vorremmo aggiornare i dati nell'anagrafe delle strutture ma non troviamo dove modificarli. Referente: Mario Ricci, mario.ricci@rsa-esempio.it",
+    "categoria_gold": "Anagrafe delle Strutture",
+    "sottocategoria_gold": "Variazione dati struttura",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E012",
+    "testo_email": "Il codice HSP11 della casa di cura Villa Serena risulta associato a un indirizzo sbagliato (compare Via Roma 1 invece di Via Garibaldi 15). Potete correggere?",
+    "categoria_gold": "Anagrafe delle Strutture",
+    "sottocategoria_gold": "Variazione dati struttura",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E013",
+    "testo_email": "Buongiorno, ci siamo accorti che il centro riabilitativo San Giorgio compare due volte nell'elenco con codici diversi, una delle due schede va eliminata o fusa. Grazie",
+    "categoria_gold": "Anagrafe delle Strutture",
+    "sottocategoria_gold": "Variazione dati struttura",
+    "difficolta": "difficile",
+    "tipo_difficolta": "ambigua",
+    "note_etichettatura": "Rettifica anagrafica/doppione -> Variazione dati struttura"
+  },
+  {
+    "id": "E014",
+    "testo_email": "Abbiamo ricevuto il decreto di accreditamento istituzionale n. 123 del 2026 ma la struttura risulta ancora non accreditata sul sistema, quindi non possiamo erogare prestazioni a carico SSR. Urgente.",
+    "categoria_gold": "Anagrafe delle Strutture",
+    "sottocategoria_gold": "Accreditamento e convenzioni",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E015",
+    "testo_email": "Vorremmo caricare il nuovo contratto di convenzione con la ASL per il laboratorio analisi, con i relativi budget annuali. Dove si inserisce?",
+    "categoria_gold": "Anagrafe delle Strutture",
+    "sottocategoria_gold": "Accreditamento e convenzioni",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E016",
+    "testo_email": "Il centro dialisi di Viterbo ha cessato l'attività il 30/09. Vi chiediamo di disattivare la struttura dall'anagrafe a partire da quella data.",
+    "categoria_gold": "Anagrafe delle Strutture",
+    "sottocategoria_gold": "Cessazione struttura",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E017",
+    "testo_email": "Nuovo medico assunto (dott. Marco Neri, CF NREMRC85T10H501P) da inserire nell'anagrafe del personale sanitario con qualifica dirigente medico, presidio di Latina.",
+    "categoria_gold": "Personale Sanitario",
+    "sottocategoria_gold": "Censimento operatore",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E018",
+    "testo_email": "Specializzando al 3° anno deve essere censito per poter operare nei reparti: come lo registriamo? Non è presente l'opzione tra le qualifiche.",
+    "categoria_gold": "Personale Sanitario",
+    "sottocategoria_gold": "Censimento operatore",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E019",
+    "testo_email": "Inoltro quanto ricevuto, vedete voi.\n\n---------- Messaggio inoltrato ----------\nDa: Ufficio Personale <personale@asl-esempio.it>\nData: lun 5 ott 2026, 09:14\nOggetto: R: R: Nuova assunzione\n\nBuongiorno, in allegato i dati del nuovo assunto Dott.ssa Anna Verdi, CF VRDNNA90C41H501B, infermiera, in servizio dal 15/10. Da inserire in anagrafica.\nCordiali saluti\n\n--\nDott.ssa Elena Marchetti\nDirigente Amministrativo - U.O.C. Servizi Sanitari Territoriali\nAzienda Sanitaria Locale Roma 9\nVia delle Magnolie 21, 00100 Roma | Tel. 06 1234567 | Cell. 339 8765432\nemail: elena.marchetti@asl-esempio.it\n\nAVVISO DI RISERVATEZZA: Il presente messaggio e gli eventuali allegati sono destinati esclusivamente al destinatario e possono contenere informazioni riservate. Se lo ha ricevuto per errore, lo cancelli e ne dia comunicazione al mittente (D.Lgs. 196/2003, Reg. UE 2016/679).",
+    "categoria_gold": "Personale Sanitario",
+    "sottocategoria_gold": "Censimento operatore",
+    "difficolta": "difficile",
+    "tipo_difficolta": "testo inoltrato; firma lunga; disclaimer",
+    "note_etichettatura": "Messaggio utile sepolto nell'inoltro"
+  },
+  {
+    "id": "E020",
+    "testo_email": "Il dott. Gallo è stato trasferito dal presidio di Rieti all'ospedale di Terni dal 1 ottobre. Aggiornare la sede di assegnazione.",
+    "categoria_gold": "Personale Sanitario",
+    "sottocategoria_gold": "Variazione incarico o sede",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E021",
+    "testo_email": "Un MMG ha ridotto il massimale da 1500 a 1200 assistiti, il sistema non permette la modifica del campo. Può intervenire qualcuno?",
+    "categoria_gold": "Personale Sanitario",
+    "sottocategoria_gold": "Variazione incarico o sede",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E022",
+    "testo_email": "Ho cambiato qualifica da CPS Infermiere a CPS Infermiere esperto; nell'elenco personale risulta ancora il vecchio inquadramento. Quando viene aggiornato?",
+    "categoria_gold": "Personale Sanitario",
+    "sottocategoria_gold": "Variazione incarico o sede",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E023",
+    "testo_email": "L'infermiera Bruni Carla è andata in pensione dal 1/10. Chiediamo la chiusura del rapporto di lavoro nell'anagrafica del personale.",
+    "categoria_gold": "Personale Sanitario",
+    "sottocategoria_gold": "Cessazione o sospensione",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E024",
+    "testo_email": "Il dott. Esposito è stato sospeso dall'albo per provvedimento disciplinare: dobbiamo sospendere la sua abilitazione professionale nel sistema fino a nuova comunicazione dell'Ordine.",
+    "categoria_gold": "Personale Sanitario",
+    "sottocategoria_gold": "Cessazione o sospensione",
+    "difficolta": "difficile",
+    "tipo_difficolta": "ambigua",
+    "note_etichettatura": "Stato professionale (non solo accessi) -> Personale Sanitario, non Utente"
+  },
+  {
+    "id": "E025",
+    "testo_email": "Il farmaco con AIC 045678012 non risulta nel prontuario regionale nonostante sia stato inserito dall'AIFA in elenco a settembre. Potete aggiornarlo?",
+    "categoria_gold": "Farmaceutica",
+    "sottocategoria_gold": "Prontuario e codici farmaco",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E026",
+    "testo_email": "Codice ATC errato per amoxicillina/ac. clavulanico nel catalogo farmaci: riporta J01CA04 invece di J01CR02.",
+    "categoria_gold": "Farmaceutica",
+    "sottocategoria_gold": "Prontuario e codici farmaco",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E027",
+    "testo_email": "Nuovo farmaco generico di fascia C da aggiungere al catalogo, comunico dati confezione: AIC 049120033, 20 cpr 10 mg.",
+    "categoria_gold": "Farmaceutica",
+    "sottocategoria_gold": "Prontuario e codici farmaco",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E028",
+    "testo_email": "Il piano terapeutico del paziente (CF PRTLGU52L10H501W) in terapia con farmaco biologico è scaduto e il sistema non permette il rinnovo online. Il medico specialista è il dott. Sala.",
+    "categoria_gold": "Farmaceutica",
+    "sottocategoria_gold": "Piani terapeutici e DPC",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E029",
+    "testo_email": "I farmacisti segnalano che la distribuzione per conto (DPC) dei farmaci per l'epatite C non è visibile nel portale DPC da lunedì.",
+    "categoria_gold": "Farmaceutica",
+    "sottocategoria_gold": "Piani terapeutici e DPC",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E030",
+    "testo_email": "La farmacia Rossi non riesce a registrare la dispensazione di un farmaco in fascia A: errore 'quantità superiore al consentito'. Il cliente è in attesa.",
+    "categoria_gold": "Farmaceutica",
+    "sottocategoria_gold": "Dispensazione e magazzino",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E031",
+    "testo_email": "Magazzino farmaci ospedaliero: le giacenze a sistema non sono allineate ai movimenti di carico dello scorso mese, risultano quantità negative per tre prodotti.",
+    "categoria_gold": "Farmaceutica",
+    "sottocategoria_gold": "Dispensazione e magazzino",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E032",
+    "testo_email": "Segnalazione di carenza: l'antibiotico pediatrico in sospensione orale non è disponibile in nessuna farmacia del distretto. Chiediamo di inserire l'alert di carenza nel sistema.",
+    "categoria_gold": "Farmaceutica",
+    "sottocategoria_gold": "Dispensazione e magazzino",
+    "difficolta": "difficile",
+    "tipo_difficolta": "ambigua",
+    "note_etichettatura": "Carenza/dispensazione -> Farmaceutica"
+  },
+  {
+    "id": "E033",
+    "testo_email": "Il medico emette la ricetta dematerializzata ma il NRE non viene generato; il sistema resta in caricamento. Succede da stamattina a più colleghi.",
+    "categoria_gold": "Ricette",
+    "sottocategoria_gold": "Errore emissione, stato o visualizzazione",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E034",
+    "testo_email": "I pazienti non vedono la ricetta sull'app, il promemoria risulta vuoto anche se la ricetta è stata emessa ieri.",
+    "categoria_gold": "Ricette",
+    "sottocategoria_gold": "Errore emissione, stato o visualizzazione",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E035",
+    "testo_email": "salve non riesco a stampare il promemoria ricetta, schermo bianco quando clicco",
+    "categoria_gold": "Ricette",
+    "sottocategoria_gold": "Errore emissione, stato o visualizzazione",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E036",
+    "testo_email": "La farmacia ha già dispensato il farmaco ma la ricetta risulta ancora 'aperta' nel nostro sistema, e il paziente la vede ancora utilizzabile. Credo sia un errore di stato.",
+    "categoria_gold": "Ricette",
+    "sottocategoria_gold": "Errore emissione, stato o visualizzazione",
+    "difficolta": "difficile",
+    "tipo_difficolta": "ambigua",
+    "note_etichettatura": "Stato ricetta incoerente -> Ricette, non Farmaceutica"
+  },
+  {
+    "id": "E037",
+    "testo_email": "Ho emesso per errore due ricette identiche per lo stesso paziente (CF BRNGNN66S10H501V), come annullo la seconda?",
+    "categoria_gold": "Ricette",
+    "sottocategoria_gold": "Annullamento e rettifica",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E038",
+    "testo_email": "Ricetta emessa con CF errato, serve rettificare dopo l'emissione ma il sistema non lo permette. Cosa devo fare?",
+    "categoria_gold": "Ricette",
+    "sottocategoria_gold": "Annullamento e rettifica",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E039",
+    "testo_email": "La ricetta per risonanza lombare è bloccata con messaggio 'appropriatezza non soddisfatta, codice RAO'. Il paziente ha dolore forte e urgenza. Si può sbloccare?",
+    "categoria_gold": "Ricette",
+    "sottocategoria_gold": "Blocchi prescrittivi e regole",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E040",
+    "testo_email": "Impossibile prescrivere il farmaco richiesto: il sistema segnala 'principio attivo sospeso da AIFA'. Il paziente è in terapia da anni, come devo comportarmi?",
+    "categoria_gold": "Ricette",
+    "sottocategoria_gold": "Blocchi prescrittivi e regole",
+    "difficolta": "difficile",
+    "tipo_difficolta": "ambigua",
+    "note_etichettatura": "Cita farmaco ma il problema è il blocco prescrittivo"
+  },
+  {
+    "id": "E041",
+    "testo_email": "Attivazione ADI per paziente 82enne dimesso ieri dall'ospedale, non riusciamo ad aprire la scheda di attivazione domiciliare: il pulsante è grigio.",
+    "categoria_gold": "Assistenza Territoriale",
+    "sottocategoria_gold": "Assistenza domiciliare (ADI)",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E042",
+    "testo_email": "Gli accessi domiciliari degli infermieri non vengono registrati dall'app mobile ADI, restano 'in sospeso' da giorni.",
+    "categoria_gold": "Assistenza Territoriale",
+    "sottocategoria_gold": "Assistenza domiciliare (ADI)",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E043",
+    "testo_email": "Dobbiamo sospendere l'ADI di un paziente per ricovero ospedaliero ma non troviamo la funzione di sospensione temporanea.",
+    "categoria_gold": "Assistenza Territoriale",
+    "sottocategoria_gold": "Assistenza domiciliare (ADI)",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E044",
+    "testo_email": "Paziente in ADI: non riusciamo a registrare le visite perché il sistema dice 'assistito senza medico di base assegnato'. Cosa facciamo?",
+    "categoria_gold": "Assistenza Territoriale",
+    "sottocategoria_gold": "Assistenza domiciliare (ADI)",
+    "difficolta": "difficile",
+    "tipo_difficolta": "ambigua",
+    "note_etichettatura": "Borderline: causa radice anagrafica ma sintomo e modulo sono ADI. Gold = ADI"
+  },
+  {
+    "id": "E045",
+    "testo_email": "Dobbiamo inserire un paziente diabetico nel PDTA diabete di tipo 2, ma non troviamo il percorso nell'elenco dei PDTA attivi.",
+    "categoria_gold": "Assistenza Territoriale",
+    "sottocategoria_gold": "Presa in carico e cronicità",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E046",
+    "testo_email": "Il piano assistenziale individuale non si salva, errore al terzo passaggio della compilazione ('campo obbligatorio mancante' ma sono tutti compilati).",
+    "categoria_gold": "Assistenza Territoriale",
+    "sottocategoria_gold": "Presa in carico e cronicità",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E047",
+    "testo_email": "La segnalazione di dimissione protetta dall'ospedale al distretto non arriva da due giorni, i pazienti rischiano di restare senza presa in carico.",
+    "categoria_gold": "Assistenza Territoriale",
+    "sottocategoria_gold": "Presa in carico e cronicità",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E048",
+    "testo_email": "Domanda di ingresso in RSA per paziente non autosufficiente inserita il 3/10: nella graduatoria non compare la richiesta.",
+    "categoria_gold": "Assistenza Territoriale",
+    "sottocategoria_gold": "Strutture residenziali e semiresidenziali",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E049",
+    "testo_email": "Centro diurno Alzheimer: non riusciamo a registrare le presenze mensili degli ospiti, il modulo si chiude con errore.",
+    "categoria_gold": "Assistenza Territoriale",
+    "sottocategoria_gold": "Strutture residenziali e semiresidenziali",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E050",
+    "testo_email": "Salve, sto tentando di accedere al mio account ma la password non funziona. Richiedo un ripristino, grazie",
+    "categoria_gold": "Utente (accessi, credenziali, profili)",
+    "sottocategoria_gold": "Reset password",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": "Esempio della traccia"
+  },
+  {
+    "id": "E051",
+    "testo_email": "Password scaduta, il link di ripristino non arriva (ho controllato anche nella posta indesiderata). Utente: l.moretti",
+    "categoria_gold": "Utente (accessi, credenziali, profili)",
+    "sottocategoria_gold": "Reset password",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E052",
+    "testo_email": "Chiediamo l'abilitazione del profilo 'prescrittore' per la dott.ssa Elisa Longo, in servizio presso il distretto 4 dal 1° ottobre.",
+    "categoria_gold": "Utente (accessi, credenziali, profili)",
+    "sottocategoria_gold": "Abilitazione profilo",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E053",
+    "testo_email": "Il collega appena assegnato deve avere un profilo di sola lettura sul modulo ADI. Potete configurarlo? Grazie",
+    "categoria_gold": "Utente (accessi, credenziali, profili)",
+    "sottocategoria_gold": "Abilitazione profilo",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E054",
+    "testo_email": "Il dipendente Paolo Gentile ha lasciato l'azienda il 30/09: disattivare la sua utenza.",
+    "categoria_gold": "Utente (accessi, credenziali, profili)",
+    "sottocategoria_gold": "Disattivazione utenza",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E055",
+    "testo_email": "URGENTE: sospettiamo che l'account di un operatore sia compromesso (accessi da IP stranieri). Bloccatelo subito.",
+    "categoria_gold": "Utente (accessi, credenziali, profili)",
+    "sottocategoria_gold": "Disattivazione utenza",
+    "difficolta": "difficile",
+    "tipo_difficolta": "urgente",
+    "note_etichettatura": "Disattivazione/blocco utenza"
+  },
+  {
+    "id": "E056",
+    "testo_email": "Dopo aver fatto accesso con SPID il portale mi riporta alla pagina di login in continuazione. Ho provato con due browser.",
+    "categoria_gold": "Utente (accessi, credenziali, profili)",
+    "sottocategoria_gold": "Autenticazione e SPID",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E057",
+    "testo_email": "Non ricevo più il codice OTP via SMS perché ho cambiato numero (nuovo 347 1122334). Come posso aggiornarlo per entrare?",
+    "categoria_gold": "Utente (accessi, credenziali, profili)",
+    "sottocategoria_gold": "Autenticazione e SPID",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E058",
+    "testo_email": "Salve, la vostra dashboard mostra 4 mln di euro spesi in farmaceutica mentre dal nostro conto economico ne risultano molti meno. Potreste verificare i dati prima di inviarli al ministero?",
+    "categoria_gold": "Flussi Informativi",
+    "sottocategoria_gold": "Qualità e coerenza dei dati",
+    "difficolta": "difficile",
+    "tipo_difficolta": "ambigua",
+    "note_etichettatura": "Esempio della traccia: cita farmaceutica ma il problema è il dato inviato al ministero"
+  },
+  {
+    "id": "E059",
+    "testo_email": "Il numero di ricette emesse a settembre nella dashboard (120.000) non coincide con quello del nostro gestionale (95.000). Vorremmo capire prima della trasmissione per la rendicontazione.",
+    "categoria_gold": "Flussi Informativi",
+    "sottocategoria_gold": "Qualità e coerenza dei dati",
+    "difficolta": "difficile",
+    "tipo_difficolta": "ambigua",
+    "note_etichettatura": "Cita ricette ma riguarda incoerenza dati/rendicontazione"
+  },
+  {
+    "id": "E060",
+    "testo_email": "Nei dati dei ricoveri del terzo trimestre ci sono circa 300 record con diagnosi principale vuota. Vanno corretti prima dell'invio regionale?",
+    "categoria_gold": "Flussi Informativi",
+    "sottocategoria_gold": "Qualità e coerenza dei dati",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E061",
+    "testo_email": "Il flusso NSIS di agosto è stato scartato dal Ministero con errore di tracciato. Allego il log di scarto.",
+    "categoria_gold": "Flussi Informativi",
+    "sottocategoria_gold": "Invio e scarti flussi",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E062",
+    "testo_email": "Il flusso SDO del secondo trimestre non risulta inviato, la scadenza è domani. Potete verificare lo stato?\n\n--\nDott.ssa Elena Marchetti\nDirigente Amministrativo - U.O.C. Servizi Sanitari Territoriali\nAzienda Sanitaria Locale Roma 9\nVia delle Magnolie 21, 00100 Roma | Tel. 06 1234567 | Cell. 339 8765432\nemail: elena.marchetti@asl-esempio.it\n\nAVVISO DI RISERVATEZZA: Il presente messaggio e gli eventuali allegati sono destinati esclusivamente al destinatario e possono contenere informazioni riservate. Se lo ha ricevuto per errore, lo cancelli e ne dia comunicazione al mittente (D.Lgs. 196/2003, Reg. UE 2016/679).",
+    "categoria_gold": "Flussi Informativi",
+    "sottocategoria_gold": "Invio e scarti flussi",
+    "difficolta": "difficile",
+    "tipo_difficolta": "firma lunga; disclaimer",
+    "note_etichettatura": "Firma e disclaimer lunghi rispetto al contenuto"
+  },
+  {
+    "id": "E063",
+    "testo_email": "Elevato numero di record scartati nel flusso specialistica ambulatoriale: il motivo è 'data prestazione antecedente alla data prescrizione'. Come procediamo con il reinvio?",
+    "categoria_gold": "Flussi Informativi",
+    "sottocategoria_gold": "Invio e scarti flussi",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E064",
+    "testo_email": "Il cruscotto delle liste d'attesa non si aggiorna da una settimana, mostra ancora i dati di inizio mese.",
+    "categoria_gold": "Flussi Informativi",
+    "sottocategoria_gold": "Reportistica e dashboard",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E065",
+    "testo_email": "Vorremmo un report mensile dei ricoveri per distretto, esportabile in Excel. È possibile averlo in dashboard?",
+    "categoria_gold": "Flussi Informativi",
+    "sottocategoria_gold": "Reportistica e dashboard",
+    "difficolta": "normale",
+    "tipo_difficolta": "",
+    "note_etichettatura": ""
+  },
+  {
+    "id": "E066",
+    "testo_email": "non funziona niente",
+    "categoria_gold": "Da verificare",
+    "sottocategoria_gold": "Da verificare",
+    "difficolta": "difficile",
+    "tipo_difficolta": "molto breve",
+    "note_etichettatura": "Impossibile classificare"
+  },
+  {
+    "id": "E067",
+    "testo_email": "Buongiorno, vi chiedo di richiamarmi appena possibile. Grazie.",
+    "categoria_gold": "Da verificare",
+    "sottocategoria_gold": "Da verificare",
+    "difficolta": "difficile",
+    "tipo_difficolta": "generica",
+    "note_etichettatura": "Nessun contenuto"
+  },
+  {
+    "id": "E068",
+    "testo_email": "Auguri di buone feste a tutto il team IT, grazie per il lavoro di quest'anno!",
+    "categoria_gold": "Da verificare",
+    "sottocategoria_gold": "Da verificare",
+    "difficolta": "difficile",
+    "tipo_difficolta": "non è un ticket",
+    "note_etichettatura": "Fuori ambito"
+  },
+  {
+    "id": "E069",
+    "testo_email": "Inoltro quanto ricevuto, vedete voi.\n\n---------- Messaggio inoltrato ----------\nDa: Ufficio Personale <personale@asl-esempio.it>\nData: lun 5 ott 2026, 09:14\nOggetto: R: R: Nuova assunzione\n\nVedi sotto, ditemi voi cosa fare.\n\n> Buongiorno, ho un problema con quella cosa che avevamo visto ieri, mi dite se si può sistemare? Grazie, Roberto\n\n--\nDott.ssa Elena Marchetti\nDirigente Amministrativo - U.O.C. Servizi Sanitari Territoriali\nAzienda Sanitaria Locale Roma 9\nVia delle Magnolie 21, 00100 Roma | Tel. 06 1234567 | Cell. 339 8765432\nemail: elena.marchetti@asl-esempio.it\n\nAVVISO DI RISERVATEZZA: Il presente messaggio e gli eventuali allegati sono destinati esclusivamente al destinatario e possono contenere informazioni riservate. Se lo ha ricevuto per errore, lo cancelli e ne dia comunicazione al mittente (D.Lgs. 196/2003, Reg. UE 2016/679).",
+    "categoria_gold": "Da verificare",
+    "sottocategoria_gold": "Da verificare",
+    "difficolta": "difficile",
+    "tipo_difficolta": "testo inoltrato; vago; firma lunga",
+    "note_etichettatura": "Nessun problema identificabile"
+  }
+]

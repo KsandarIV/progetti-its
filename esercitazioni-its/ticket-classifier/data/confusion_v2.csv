@@ -1,0 +1,10 @@
+,Anagrafe Assistiti,Anagrafe delle Strutture,Personale Sanitario,Farmaceutica,Ricette,Assistenza Territoriale,"Utente (accessi, credenziali, profili)",Flussi Informativi,Da verificare
+Anagrafe Assistiti,7,0,0,0,0,0,0,0,1
+Anagrafe delle Strutture,0,8,0,0,0,0,0,0,0
+Personale Sanitario,0,0,8,0,0,0,0,0,0
+Farmaceutica,0,0,0,7,0,0,0,0,1
+Ricette,0,0,0,0,7,0,0,0,1
+Assistenza Territoriale,0,0,0,0,0,6,0,2,1
+"Utente (accessi, credenziali, profili)",0,0,0,0,0,0,5,0,3
+Flussi Informativi,0,0,0,0,0,0,0,6,1
+Da verificare,0,0,0,0,0,0,0,0,3

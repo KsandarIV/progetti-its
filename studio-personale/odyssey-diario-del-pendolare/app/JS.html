@@ -1,0 +1,758 @@
+<script>
+/**
+ * ODYSSEY Engine v4.1 — PARTE 1/5: HEADER + EMOJI + PERCORSI
+ * Mappatura percorsi reali dal diario del pendolare.
+ */
+function gasRun(fnName, ...args) {
+  return new Promise((resolve, reject) => {
+    google.script.run
+      .withSuccessHandler(resolve)
+      .withFailureHandler(reject)
+      [fnName](...args);
+  });
+}
+
+const MOODS_LIST = [
+  "Arrabbiato", "Nervoso", "Frustrato", "Felice", "Sereno", "Calmo", "Neutro", "Triste",
+  "Stanco", "Assonnato", "Pigro", "Annoiato", "Ansioso", "Distratto", "Pensieroso",
+  "Focalizzato", "Energetico", "Iperattivo", "Entusiasta", "Rilassato"
+];
+const MONTHS_IT = ["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"];
+
+const App = {
+  // Emote per mezzo (a livello App per evitare problemi di this)
+  EMOJI_MEZZO: {
+    'Piedi':         ['🚶'],
+    'Metromare':     ['🚇', 'M'],
+    'Metro A':       ['🚇', 'A'],
+    'Metro B':       ['🚇', 'B'],
+    'Metro C':       ['🚇', 'C'],
+    'Bus Cotral':    ['🚌'],
+    'Bus ATAC N.020':['🚌', '020'],
+    'Bus':           ['🚌'],
+    'Treno':         ['🚆'],
+    'Auto':          ['🚗']
+  },
+  emojiFor(t) { return (App.EMOJI_MEZZO && App.EMOJI_MEZZO[t]) || [t]; },
+
+  // Modalità WIP: true = Tratta Personalizzata e Modifica Dataset mostrano popup "disponibile prossimamente"
+  // false = funzionalità complete (da implementare più avanti)
+  WIP_MODE: true,
+
+  state: {
+    config: null,
+    tripType: '',
+    selectedDay: null,
+    selectedMonth: new Date().getMonth() + 1,
+    isMonthAuto: true,
+    crowdingArr: [],
+    moodArr: [],
+    activeTimeTarget: null,
+    longPressTimer: null,
+    offlineQueue: JSON.parse(localStorage.getItem('odyssey_queue') || '[]'),
+    currentPercorso: null,
+    currentTrattaIndex: 0,
+    currentTrattaData: {},
+    PERCORSI: [
+      {
+        id: 'casa-its-vdanubio',
+        name: 'CASA → ITS',
+        tripType: 'andata',
+        tratte: [
+          { name: 'Casa — Viale Danubio',              transport: 'Piedi',          cambi: 0 },
+          { name: 'Viale Danubio — Lido Centro',       transport: 'Bus Cotral',     cambi: 1 },
+          { name: 'Lido Centro — EUR Magliana',        transport: 'Metromare',     cambi: 1 },
+          { name: 'EUR Magliana — Colosseo',           transport: 'Metro B',       cambi: 1 },
+          { name: 'Colosseo — Pigneto',                transport: 'Metro C',       cambi: 1 },
+          { name: 'Pigneto — ITS',                     transport: 'Piedi', cambi: 0 }
+        ]
+      },
+      {
+        id: 'its-casa-vdanubio',
+        name: 'ITS → CASA',
+        tripType: 'ritorno',
+        tratte: [
+          { name: 'ITS — Pigneto',                     transport: 'Piedi', cambi: 0 },
+          { name: 'Pigneto — Colosseo',                transport: 'Metro C',       cambi: 1 },
+          { name: 'Colosseo — Piramide',               transport: 'Metro B',       cambi: 1 },
+          { name: 'Porta S. Paolo — Lido Centro',      transport: 'Metromare',     cambi: 0 },
+          { name: 'Lido Centro — Viale Danubio',       transport: 'Bus Cotral',     cambi: 1 },
+          { name: 'Viale Danubio — Casa',              transport: 'Piedi',          cambi: 0 }
+        ]
+      }
+    ]
+  },
+
+  // === CONTINUA IN JS_part2_init.html ===
+// === ODYSSEY v4.1 — PARTE 2/5: INIT + ONLINE STATUS + CALENDARIO ===
+
+els: {
+  stepHome: document.getElementById('step-home'),
+  stepRouting: document.getElementById('step-routing'),
+  stepTracking: document.getElementById('step-tracking'),
+  overlay: document.getElementById('loading-overlay'),
+  toastContainer: document.getElementById('toast-container'),
+  modalOverlay: document.getElementById('modal-overlay'),
+  form: document.getElementById('segment-form')
+},
+
+async init() {
+  this.updateOnlineStatus(navigator.onLine);
+  window.addEventListener('online', () => this.updateOnlineStatus(true));
+  window.addEventListener('offline', () => this.updateOnlineStatus(false));
+  this.showLoading("Avvio Sistemi ODYSSEY...");
+  try {
+    this.state.config = await gasRun('getFormConfig');
+    this.state.selectedMonth = parseInt(this.state.config.today.split('.')[1], 10);
+    this.renderCalendar();
+    this.setupMonthToggle();
+    this.setupModals();
+    this.setupGestures();
+    this.setupNavigation();
+    this.loadRoutes();
+    if (this.state.offlineQueue.length > 0 && navigator.onLine) this.flushOfflineQueue();
+  } catch (err) {
+    console.error("[ODYSSEY init] errore:", err);
+    const msg = (err && (err.message || err.toString())) || "Errore sconosciuto";
+    this.showToast("Errore init: " + msg, "error");
+    this.renderCalendar();
+    try { this.setupMonthToggle(); } catch(e) { console.error(e); }
+    try { this.setupModals(); }       catch(e) { console.error(e); }
+    try { this.setupGestures(); }     catch(e) { console.error(e); }
+    try { this.setupNavigation(); }   catch(e) { console.error(e); }
+  } finally {
+    this.hideLoading();
+  }
+},
+
+updateOnlineStatus(isOnline) {
+  const dot = document.getElementById('conn-status');
+  if (!dot) return;
+  if (isOnline) {
+    dot.className = 'status-indicator online';
+    if (this.state.offlineQueue.length > 0) this.flushOfflineQueue();
+  } else {
+    dot.className = 'status-indicator offline';
+  }
+},
+
+// === CALENDARIO ===
+renderCalendar() {
+  const grid = document.getElementById('calendar-grid');
+  grid.innerHTML = '';
+  document.getElementById('current-month-display').textContent = MONTHS_IT[this.state.selectedMonth - 1];
+  
+  for (let i = 1; i <= 31; i++) {
+    const btn = document.createElement('div');
+    btn.className = 'cal-day';
+    btn.textContent = i;
+    btn.addEventListener('click', () => this._onCalDayClick(i));
+    grid.appendChild(btn);
+  }
+},
+
+_onCalDayClick(day) {
+  if (!this.state.isMonthAuto) {
+    this.openModal('modal-month');
+    this.state.selectedDay = day;
+  } else {
+    this.selectDateAndProceed(day, this.state.selectedMonth);
+  }
+},
+
+setupMonthToggle() {
+  const toggle = document.getElementById('month-auto-toggle');
+  toggle.addEventListener('change', (e) => {
+    this.state.isMonthAuto = e.target.checked;
+    if (this.state.isMonthAuto && this.state.config) {
+      this.state.selectedMonth = parseInt(this.state.config.today.split('.')[1], 10);
+      document.getElementById('current-month-display').textContent = MONTHS_IT[this.state.selectedMonth - 1];
+    }
+  });
+  const monthSlider = document.getElementById('month-slider');
+  monthSlider.addEventListener('input', (e) => {
+    document.getElementById('month-slider-title').textContent = MONTHS_IT[parseInt(e.target.value, 10) - 1];
+  });
+  document.getElementById('btn-confirm-month').addEventListener('click', () => {
+    this.state.selectedMonth = parseInt(monthSlider.value, 10);
+    document.getElementById('current-month-display').textContent = MONTHS_IT[this.state.selectedMonth - 1];
+    this.closeModals();
+    this.selectDateAndProceed(this.state.selectedDay, this.state.selectedMonth);
+  });
+},
+
+selectDateAndProceed(day, month) {
+  const year = new Date().getFullYear();
+  const dStr = String(day).padStart(2, '0');
+  const mStr = String(month).padStart(2, '0');
+  document.getElementById('route-date-val').textContent = `${dStr}.${mStr}.${year}`;
+  const dateObj = new Date(year, month - 1, day);
+  const dayNames = ["Domenica","Lunedì","Martedì","Mercoledì","Giovedì","Venerdì","Sabato"];
+  document.getElementById('route-day-name').textContent = dayNames[dateObj.getDay()];
+  const isToday = (day === new Date().getDate() && month === (new Date().getMonth() + 1));
+  document.getElementById('route-day-type').textContent = isToday ? "OGGI:" : "GIORNO:";
+  this.switchScreen('step-home', 'step-routing');
+},
+
+// === CONTINUA IN JS_part3_routing.html ===
+// === ODYSSEY v4.1 — PARTE 3/5: ROUTING (Schermata 2) + ENTER TRATTA ===
+
+loadRoutes() {
+  const container = document.getElementById('templates-container');
+  container.innerHTML = '';
+  this.state.PERCORSI.forEach(percorso => {
+    // Emote concatenate con separatore " → " fra mezzi consecutivi
+    const emojisStr = percorso.tratte
+      .map(t => this.emojiFor(t.transport).join(''))
+      .join(' → ');
+    const card = document.createElement('div');
+    card.className = 'route-card';
+    card.innerHTML = `
+      <div class="rc-header">
+        <div class="rc-title">${percorso.name}</div>
+        <div class="rc-tratte-badge">${percorso.tratte.length} TRATTE</div>
+      </div>
+      <div class="rc-emojis">${emojisStr}</div>
+    `;
+    card.addEventListener('click', () => this.startPercorso(percorso));
+    container.appendChild(card);
+  });
+},
+
+startPercorso(percorso) {
+  this.state.currentPercorso = percorso;
+  this.state.currentTrattaIndex = 0;
+  this.state.currentTrattaData = {};
+  this.enterTratta();
+},
+
+enterTratta() {
+  const p = this.state.currentPercorso;
+  if (!p) return;
+  const t = p.tratte[this.state.currentTrattaIndex];
+  if (!t) return;
+
+  document.getElementById('route').value     = p.name + ' / ' + t.name;
+  document.getElementById('transport').value = t.transport;
+  document.getElementById('cambi').value     = t.cambi;
+  this.state.tripType = p.tripType;
+
+  const emojiStr = this.emojiFor(t.transport).join('');
+  document.getElementById('tratta-name').textContent =
+    emojiStr + '  ' + t.name + ' (' + t.transport + ')';
+  document.getElementById('tratta-progress').textContent =
+    (this.state.currentTrattaIndex + 1) + '/' + p.tratte.length;
+
+  const btnPrev = document.getElementById('btn-tratta-prev');
+  btnPrev.disabled = (this.state.currentTrattaIndex === 0);
+
+  const btnNext = document.getElementById('btn-tratta-next');
+  btnNext.textContent = (this.state.currentTrattaIndex === p.tratte.length - 1)
+    ? 'SALVA PERCORSO ☁️' : 'PROSSIMA ▶';
+
+  this.resetTrackingForm();
+  this.switchScreen('step-routing', 'step-tracking');
+},
+
+prevTratta() {
+  if (this.state.currentTrattaIndex > 0) {
+    this.state.currentTrattaIndex--;
+    this.enterTratta();
+  }
+},
+
+// === WIP: Tratta Personalizzata + Modifica Dataset ===
+startTracking() {
+  if (this.WIP_MODE) {
+    this.openWipPopup('Tratta Personalizzata',
+      'Disponibile nella prossima release. Per ora usa i percorsi predefiniti.');
+  }
+},
+
+editDataset() {
+  if (this.WIP_MODE) {
+    this.openWipPopup('Modifica Dataset',
+      'Disponibile nella prossima release. Per ora modifica i dati direttamente dal foglio Google.');
+  }
+},
+
+openWipPopup(title, text) {
+  const titleEl = document.getElementById('wip-title');
+  const textEl  = document.getElementById('wip-text');
+  if (titleEl) titleEl.textContent = title;
+  if (textEl)  textEl.textContent  = text;
+  this.openModal('modal-wip');
+},
+
+resetTrackingForm() {
+  this.els.form.reset();
+  document.querySelectorAll('.time-box').forEach(b => b.classList.remove('active', 'active-primary'));
+  this.state.crowdingArr = [];
+  this.state.moodArr = [];
+  this.updateCrowdDisplay();
+  document.getElementById('val-mood').textContent = '-';
+  document.getElementById('val-seat').textContent = 'OFF';
+  document.getElementById('val-audio').textContent = '0%';
+},
+
+updateCrowdDisplay() {
+  const n = this.state.crowdingArr.length;
+  const el = document.getElementById('val-crowd');
+  if (el) el.textContent = n === 0 ? '0/5' : (this.state.crowdingArr.join(' ') + ' (' + n + '/5)');
+  const tr = document.getElementById('tracker-crowd');
+  if (tr) tr.textContent = "Valori: " + (this.state.crowdingArr.join(' - ') || 'nessuno');
+},
+
+// === CONTINUA IN JS_part4_tracking.html ===
+// === ODYSSEY v4.1 — PARTE 4/5: GESTURES + WHEEL PICKER + MODALI ===
+
+setupGestures() {
+  // Tap = now, Long press = wheel picker
+  ['box-partenza', 'box-arrivo'].forEach(id => {
+    const box = document.getElementById(id);
+    this.addLongPressSupport(box,
+      () => this.setTimeToNow(box),
+      () => this.openTimeWheel(box)
+    );
+  });
+  // Prossimo Mezzo: tap diretto al wheel picker
+  const boxNext = document.getElementById('box-prossimo');
+  if (boxNext) boxNext.addEventListener('click', () => this.openTimeWheel(boxNext));
+// Affollamento: un semplice tap apre subito la modale
+  const btnCrowd = document.getElementById('btn-opt-crowd');
+  if (btnCrowd) {
+    btnCrowd.addEventListener('click', () => {
+      this.state.crowdingArr = []; 
+      this.updateCrowdDisplay();
+      
+      this.renderModalCrowd();
+      this.openModal('modal-crowd');
+    });
+  };
+  // Sedile
+  const btnSeat = document.getElementById('seat_avail');
+  if (btnSeat) btnSeat.addEventListener('change', (e) => {
+    document.getElementById('val-seat').textContent = e.target.checked ? 'ON' : 'OFF';
+    if (e.target.checked) this.openModal('modal-sitting');
+    else document.getElementById('sitting').value = 'FALSE';
+  });
+  const btnSitYes = document.getElementById('btn-sit-yes');
+  if (btnSitYes) btnSitYes.addEventListener('click', () => {
+    document.getElementById('sitting').value = 'TRUE';
+    this.closeModals();
+  });
+  const btnSitNo = document.getElementById('btn-sit-no');
+  if (btnSitNo) btnSitNo.addEventListener('click', () => {
+    document.getElementById('sitting').value = 'FALSE';
+    this.closeModals();
+  });
+  // Audio
+  const btnAudio = document.getElementById('btn-opt-audio');
+  if (btnAudio) btnAudio.addEventListener('click', () => {
+    this.quickCycleArray([document.getElementById('audio').value], ['0%','25%','50%','75%','100%'], 'val-audio', 'audio');
+  });
+  // Mood
+  const btnMood = document.getElementById('btn-opt-mood');
+  if (btnMood) btnMood.addEventListener('click', () => {
+    this.renderModalMood();
+    this.openModal('modal-mood');
+  });
+  // Chiudi modali con .btn-close
+  document.querySelectorAll('.btn-close').forEach(b => {
+    if (!b.dataset.closeBound) {
+      b.addEventListener('click', () => this.closeModals());
+      b.dataset.closeBound = '1';
+    }
+  });
+},
+
+addLongPressSupport(element, onShortTap, onLongPress) {
+  let timer, isLongPress = false;
+  element.addEventListener('pointerdown', () => {
+    isLongPress = false;
+    timer = setTimeout(() => {
+      isLongPress = true;
+      if (navigator.vibrate) navigator.vibrate(50);
+      onLongPress();
+    }, 500);
+  });
+  element.addEventListener('pointerup', () => {
+    clearTimeout(timer);
+    if (!isLongPress) onShortTap();
+  });
+  element.addEventListener('pointercancel', () => clearTimeout(timer));
+  element.addEventListener('pointerleave', () => clearTimeout(timer));
+},
+
+quickCycleArray(currArr, options, displayId, inputId) {
+  let currVal = currArr.length > 0 ? currArr[currArr.length - 1] : options[0];
+  const nextIdx = (options.indexOf(currVal) + 1) % options.length;
+  const nextVal = options[nextIdx];
+  if (currArr === this.state.crowdingArr) {
+    this.state.crowdingArr = [nextVal];
+  }
+  const el = document.getElementById(displayId);
+  const inp = document.getElementById(inputId);
+  if (el) el.textContent = nextVal;
+  if (inp) inp.value = nextVal;
+},
+
+setTimeToNow(boxElement) {
+  const targetId = boxElement.dataset.target;
+  const input = document.getElementById(targetId);
+  const now = new Date();
+  input.value = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+  boxElement.classList.add('active');
+  setTimeout(() => boxElement.classList.remove('active'), 300);
+  boxElement.style.borderColor = 'var(--secondary)';
+},
+
+// === WHEEL PICKER (orari HH 0-23 e MM 0-59) ===
+_wheels: { h: null, m: null },
+
+_buildWheel(strip, max, current) {
+  strip.innerHTML = '';
+  const ITEM_H = 44;
+  const VIEWPORT_H = 220;
+  const PADDING = (VIEWPORT_H - ITEM_H) / 2;
+  strip.style.paddingTop = PADDING + 'px';
+  strip.style.paddingBottom = PADDING + 'px';
+  for (let i = 0; i < max; i++) {
+    const item = document.createElement('div');
+    item.className = 'wheel-item';
+    item.textContent = String(i).padStart(2, '0');
+    item.dataset.value = i;
+    item.addEventListener('click', () => this._snapWheel(strip, i));
+    strip.appendChild(item);
+  }
+  strip._wheelState = { max, itemH: ITEM_H, current, offset: 0 };
+  this._snapWheel(strip, current, false);
+  return strip._wheelState;
+},
+
+_snapWheel(strip, value, animate) {
+  const st = strip._wheelState;
+  if (!st) return;
+  st.current = value;
+  st.offset = -(value * st.itemH);
+  strip.style.transition = animate === false ? 'none' : 'transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)';
+  strip.style.transform = `translateY(${st.offset}px)`;
+  Array.from(strip.children).forEach((c, i) => c.classList.toggle('active', i === st.current));
+},
+
+_attachWheelDrag(strip) {
+  let startY = 0, startOffset = 0, dragging = false, pointerId = null;
+  const st = () => strip._wheelState;
+  strip.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    pointerId = e.pointerId;
+    try { strip.setPointerCapture(pointerId); } catch(_){}
+    startY = e.clientY;
+    startOffset = st().offset;
+    strip.style.transition = 'none';
+  });
+  strip.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    e.preventDefault();
+    const newOffset = startOffset + (e.clientY - startY);
+    const maxOff = 0, minOff = -((st().max - 1) * st().itemH);
+    st().offset = Math.max(minOff - st().itemH, Math.min(maxOff + st().itemH, newOffset));
+    strip.style.transform = `translateY(${st().offset}px)`;
+  });
+  const onUp = () => {
+    if (!dragging) return;
+    dragging = false;
+    try { strip.releasePointerCapture(pointerId); } catch(_){}
+    const value = Math.max(0, Math.min(st().max - 1, Math.round(-st().offset / st().itemH)));
+    this._snapWheel(strip, value, true);
+  };
+  strip.addEventListener('pointerup', onUp);
+  strip.addEventListener('pointercancel', onUp);
+},
+
+openTimeWheel(boxElement) {
+  this.state.activeTimeTarget = boxElement;
+  const inputId = boxElement.dataset.target;
+  const currVal = document.getElementById(inputId).value;
+  let h = 12, m = 0;
+  if (currVal && currVal.includes(':')) {
+    const p = currVal.split(':');
+    h = parseInt(p[0], 10) || 0;
+    m = parseInt(p[1], 10) || 0;
+  } else {
+    const now = new Date();
+    h = now.getHours(); m = now.getMinutes();
+  }
+  const hStrip = document.getElementById('wheel-h-strip');
+  const mStrip = document.getElementById('wheel-m-strip');
+  if (hStrip && mStrip) {
+    hStrip.innerHTML = ''; mStrip.innerHTML = '';
+    this._wheels.h = this._buildWheel(hStrip, 24, h);
+    this._wheels.m = this._buildWheel(mStrip, 60, m);
+    this._attachWheelDrag(hStrip);
+    this._attachWheelDrag(mStrip);
+  }
+  const btnConfirm = document.getElementById('btn-confirm-time');
+  if (btnConfirm) btnConfirm.onclick = () => {
+    const hh = String(this._wheels.h.current).padStart(2, '0');
+    const mm = String(this._wheels.m.current).padStart(2, '0');
+    document.getElementById(inputId).value = `${hh}:${mm}`;
+    boxElement.style.borderColor = inputId === 'n_pros' ? 'var(--primary)' : 'var(--secondary)';
+    this.closeModals();
+  };
+  this.openModal('modal-time-wheel');
+},
+
+setupModals() {
+  document.querySelectorAll('.btn-close').forEach(b => {
+    if (!b.dataset.closeBound) {
+      b.addEventListener('click', () => this.closeModals());
+      b.dataset.closeBound = '1';
+    }
+  });
+},
+
+renderModalCrowd() {
+  const grid = document.getElementById('grid-modal-crowd');
+  if (!grid) return;
+  grid.innerHTML = '';
+  
+  // Creiamo i bottoni 1, 2, 3, 4, 5
+  [1, 2, 3, 4, 5].forEach(v => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn-large';
+    btn.textContent = v;
+    
+    btn.onclick = () => {
+      // 1. Aggiungiamo il valore all'array (ammettendo i doppioni!)
+      this.state.crowdingArr.push(String(v));
+      
+      // 2. Aggiorniamo subito i testi a schermo nella modale
+      this.updateCrowdDisplay();
+      
+      // 3. Effetto visivo (flash) per far capire che il tocco è stato preso
+      btn.style.backgroundColor = 'var(--secondary)';
+      btn.style.color = 'var(--bg-base)';
+      setTimeout(() => {
+        btn.style.backgroundColor = '';
+        btn.style.color = '';
+      }, 150);
+    };
+    grid.appendChild(btn);
+  });
+
+  // Tasto Conferma (FATTO)
+  const btnConfirmCrowd = document.getElementById('btn-confirm-crowd');
+  if (btnConfirmCrowd) {
+    btnConfirmCrowd.onclick = () => {
+      this.updateCrowdDisplay();
+      
+      // FONDAMENTALE: Popoliamo il campo nascosto che verrà inviato al foglio Google!
+      const inputCrowding = document.getElementById('crowding');
+      if (inputCrowding) {
+        inputCrowding.value = this.state.crowdingArr.join(' '); // Es: "1 2 1"
+      }
+      
+      this.closeModals();
+    };
+  }
+},
+
+renderModalMood() {
+  const grid = document.getElementById('grid-modal-mood');
+  if (!grid) return;
+  grid.innerHTML = '';
+  MOODS_LIST.forEach(m => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn-large';
+    if (this.state.moodArr.includes(m)) btn.classList.add('active');
+    btn.textContent = m;
+    btn.onclick = () => {
+      if (this.state.moodArr.includes(m)) {
+        this.state.moodArr = this.state.moodArr.filter(x => x !== m);
+        btn.classList.remove('active');
+      } else {
+        this.state.moodArr.push(m);
+        btn.classList.add('active');
+      }
+      const tr = document.getElementById('tracker-mood');
+      if (tr) tr.textContent = "Mood: " + (this.state.moodArr.join(', ') || '-');
+    };
+    grid.appendChild(btn);
+  });
+  const tr = document.getElementById('tracker-mood');
+  if (tr) tr.textContent = "Mood: " + (this.state.moodArr.join(', ') || '-');
+  const btnConfirmMood = document.getElementById('btn-confirm-mood');
+  if (btnConfirmMood) btnConfirmMood.onclick = () => {
+    const dv = this.state.moodArr.length > 0 ? this.state.moodArr[this.state.moodArr.length - 1] : '-';
+    document.getElementById('val-mood').textContent = dv;
+    document.getElementById('mood').value = this.state.moodArr.join(' ');
+    this.closeModals();
+  };
+},
+
+openModal(modalId) {
+  if (this.els.modalOverlay) this.els.modalOverlay.classList.remove('hidden');
+  document.querySelectorAll('.modal-content').forEach(m => m.classList.add('hidden'));
+  const target = document.getElementById(modalId);
+  if (target) target.classList.remove('hidden');
+},
+
+closeModals() {
+  if (this.els.modalOverlay) this.els.modalOverlay.classList.add('hidden');
+},
+
+// === CONTINUA IN JS_part5_submit.html ===
+// === ODYSSEY v4.1 — PARTE 5/5: SUBMIT + OFFLINE + UTILITIES ===
+
+setupNavigation() {
+  const btnCustom = document.getElementById('btn-custom-route');
+  if (btnCustom) btnCustom.addEventListener('click', () => this.startTracking());
+  const btnEdit = document.getElementById('btn-edit-dataset');
+  if (btnEdit) btnEdit.addEventListener('click', () => this.editDataset());
+
+  const map = [
+    ['btn-back-home',     'step-routing', 'step-home'],
+    ['btn-go-home',       'step-routing', 'step-home'],
+    ['btn-back-routing',  'step-tracking', 'step-routing'],
+    ['btn-go-home-track', 'step-tracking', 'step-home']
+  ];
+  map.forEach(([id, from, to]) => {
+    const btn = document.getElementById(id);
+    if (btn) btn.addEventListener('click', () => this.switchScreen(from, to));
+  });
+  const btnWipClose = document.getElementById('btn-wip-close');
+  if (btnWipClose) btnWipClose.addEventListener('click', () => this.closeModals());
+  const btnPrev = document.getElementById('btn-tratta-prev');
+  if (btnPrev) btnPrev.addEventListener('click', () => this.prevTratta());
+  const btnNext = document.getElementById('btn-tratta-next');
+  if (btnNext) btnNext.addEventListener('click', () => this.handleFormSubmit());
+},
+
+switchScreen(fromId, toId) {
+  const f = document.getElementById(fromId);
+  const t = document.getElementById(toId);
+  if (f) f.classList.add('hidden');
+  if (t) { t.classList.remove('hidden'); t.classList.add('fade-in'); }
+},
+
+// === HANDLE FORM SUBMIT (PERCORSO-ORIENTED) ===
+async handleFormSubmit() {
+  if (!document.getElementById('i_eff').value && !document.getElementById('l_arr').value) {
+    this.showToast("Inserisci almeno l'ora di partenza o arrivo.", "error");
+    return;
+  }
+  const formData = new FormData(this.els.form);
+  const dataObj = Object.fromEntries(formData.entries());
+  dataObj.tripType = this.state.tripType;
+  dataObj.date = document.getElementById('route-date-val').textContent;
+  dataObj.day_type = this.state.config ? this.state.config.dayType : 'feriale';
+
+  const p = this.state.currentPercorso;
+  const idx = this.state.currentTrattaIndex;
+  if (p) {
+    dataObj.route = p.tratte[idx].name;
+    dataObj.percorso_id    = p.id;
+    dataObj.tratta_index   = String(idx);
+    dataObj.tratte_totali  = String(p.tratte.length);
+  }
+
+  this.showLoading("Salvataggio in corso...");
+  let saveOk = false;
+  try {
+    if (navigator.onLine) {
+      const result = await gasRun('appendSegment', dataObj);
+      if (result && result.success === false) {
+        console.warn("Server ha rifiutato:", result.error);
+        this.enqueueOffline(dataObj);
+        this.showToast("Server non disponibile, salvato offline. 💾", "error");
+      } else {
+        saveOk = true;
+        this.showToast("Tratta " + (idx + 1) + "/" + (p ? p.tratte.length : 1) + " salvata! 🎉", "success");
+      }
+    } else {
+      this.enqueueOffline(dataObj);
+      saveOk = true;
+    }
+  } catch (err) {
+    console.warn("Errore gasRun:", err);
+    this.enqueueOffline(dataObj);
+    this.showToast("Errore rete, salvato in coda offline. 💾", "error");
+  } finally {
+    this.hideLoading();
+  }
+
+  if (!p) {
+    this.switchScreen('step-tracking', 'step-home');
+    return;
+  }
+  // Percorso-oriented: passa alla prossima tratta o termina
+  if (idx < p.tratte.length - 1) {
+    this.state.currentTrattaIndex++;
+    this.enterTratta();
+    this.showToast("Tratta " + (idx + 1) + " salvata. Ora la " + (idx + 2) + " di " + p.tratte.length + ".", "success");
+  } else {
+    const totali = p.tratte.length;
+    this.state.currentPercorso = null;
+    this.state.currentTrattaIndex = 0;
+    this.state.currentTrattaData = {};
+    this.showToast("Percorso completo! " + totali + " tratte salvate su Cloud ☁️", "success");
+    this.switchScreen('step-tracking', 'step-routing');
+  }
+},
+
+enqueueOffline(dataObj) {
+  dataObj._timestamp = new Date().toISOString();
+  this.state.offlineQueue.push(dataObj);
+  localStorage.setItem('odyssey_queue', JSON.stringify(this.state.offlineQueue));
+  const dot = document.getElementById('conn-status');
+  if (dot) dot.className = 'status-indicator offline';
+},
+
+async flushOfflineQueue() {
+  if (this.state.offlineQueue.length === 0) return;
+  this.showToast(`Sincronizzazione di ${this.state.offlineQueue.length} tratte in sospeso...`, "success");
+  const queueToProcess = [...this.state.offlineQueue];
+  const failed = [];
+  for (const item of queueToProcess) {
+    try {
+      const result = await gasRun('appendSegment', item);
+      if (result && result.success === false) failed.push(item);
+    } catch (e) { failed.push(item); }
+  }
+  this.state.offlineQueue = failed;
+  localStorage.setItem('odyssey_queue', JSON.stringify(this.state.offlineQueue));
+  if (failed.length === 0) {
+    this.showToast("Tutti i dati offline sono stati sincronizzati! ☁️", "success");
+  } else {
+    this.showToast(`Sincronizzazione parziale: ${failed.length} tratte ancora in coda.`, "error");
+  }
+},
+
+showLoading(text) {
+  const el = document.getElementById('loading-text');
+  if (el) el.textContent = text;
+  if (this.els.overlay) this.els.overlay.classList.remove('hidden');
+},
+
+hideLoading() {
+  if (this.els.overlay) this.els.overlay.classList.add('hidden');
+},
+
+showToast(message, type) {
+  type = type || "success";
+  const toast = document.createElement('div');
+  toast.className = 'toast ' + type;
+  toast.innerHTML = '<span>' + message + '</span>';
+  if (this.els.toastContainer) this.els.toastContainer.appendChild(toast);
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(20px)';
+    setTimeout(() => { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 300);
+  }, 4000);
+}
+}; // Fine dell'oggetto App
+
+// Bootstrap: Questo è il comando che fa partire tutto!
+document.addEventListener('DOMContentLoaded', () => App.init());
+</script>

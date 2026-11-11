@@ -1,0 +1,124 @@
+id,email,categoria,sottocategoria,difficile
+E001,"Buonasera, sto tentando di effettuare la scelta del medico di base per RSSMRA80A01H501U ma il sistema è bloccato. Restituisce un errore 'E542 - permessi insufficienti'. Potete controllare?",Anagrafe Assistiti,Scelta/revoca medico,0
+E002,"Gentili, la signora Bianchi Lucia (CF BNCLCU45C50H501Z) risulta ancora assegnata al dott. Verdi, deceduto lo scorso mese. Non riusciamo a revocare il medico per riassegnarne uno nuovo. Grazie.
+Segreteria Distretto 3",Anagrafe Assistiti,Scelta/revoca medico,0
+E003,"Il cognome di un assistito è stato registrato con un errore di battitura (Rosi invece di Rossi), CF RSSGNN72M10H501K. Come lo correggiamo? Il sistema non ci fa modificare il campo.",Anagrafe Assistiti,Variazione dati anagrafici,0
+E004,"buongiorno cambio residenza da Roma a Frosinone, l'anagrafe assistiti mi mostra ancora l'indirizzo vecchio, dovrei aggiornare. mio tel 333 1234567 grazie",Anagrafe Assistiti,Variazione dati anagrafici,0
+E005,Un paziente straniero con permesso di soggiorno scaduto necessita di cure urgenti e chiede l'iscrizione al SSR con codice STP. Non troviamo la voce in anagrafe per inserirlo. Potete indicarci la procedura nel sistema?,Anagrafe Assistiti,Esenzioni e iscrizione SSR,0
+E006,"Salve, l'esenzione per patologia 048 della paziente Conti Marta (CF CNTMRT58H55L219T) non compare più a sistema, eppure è stata rilasciata a marzo. Non riesce a ritirare i farmaci senza ticket.",Anagrafe Assistiti,Esenzioni e iscrizione SSR,0
+E007,Abbiamo individuato due schede per lo stesso assistito: una con CF RSSLRA60D45F205X e una con CF provvisorio. Chiediamo l'unificazione delle posizioni.,Anagrafe Assistiti,Duplicati e unificazione posizioni,0
+E008,"Buongiorno, scrivo per due cose. 1) Il sig. Ferri Paolo risulta con due posizioni anagrafiche (CF FRRPLA70B12H501Q e un codice provvisorio) e vorremmo unificarle. 2) Inoltre la mia password per il portale scade domani, mi servirà un ripristino. Grazie.
+
+--
+Dott.ssa Elena Marchetti
+Dirigente Amministrativo - U.O.C. Servizi Sanitari Territoriali
+Azienda Sanitaria Locale Roma 9
+Via delle Magnolie 21, 00100 Roma | Tel. 06 1234567 | Cell. 339 8765432
+email: elena.marchetti@asl-esempio.it
+
+AVVISO DI RISERVATEZZA: Il presente messaggio e gli eventuali allegati sono destinati esclusivamente al destinatario e possono contenere informazioni riservate. Se lo ha ricevuto per errore, lo cancelli e ne dia comunicazione al mittente (D.Lgs. 196/2003, Reg. UE 2016/679).",Anagrafe Assistiti,Duplicati e unificazione posizioni,1
+E009,"Apriamo un nuovo poliambulatorio privato a Latina (via Appia 100). Come lo inseriamo nell'anagrafe delle strutture? Abbiamo già il codice STS11, ci serve il resto della procedura.",Anagrafe delle Strutture,Censimento nuova struttura,0
+E010,"Struttura non trovata nel menu a tendina, dobbiamo registrare ambulatorio",Anagrafe delle Strutture,Censimento nuova struttura,1
+E011,"La nostra RSA ha cambiato PEC e direttore sanitario; vorremmo aggiornare i dati nell'anagrafe delle strutture ma non troviamo dove modificarli. Referente: Mario Ricci, mario.ricci@rsa-esempio.it",Anagrafe delle Strutture,Variazione dati struttura,0
+E012,Il codice HSP11 della casa di cura Villa Serena risulta associato a un indirizzo sbagliato (compare Via Roma 1 invece di Via Garibaldi 15). Potete correggere?,Anagrafe delle Strutture,Variazione dati struttura,0
+E013,"Buongiorno, ci siamo accorti che il centro riabilitativo San Giorgio compare due volte nell'elenco con codici diversi, una delle due schede va eliminata o fusa. Grazie",Anagrafe delle Strutture,Variazione dati struttura,1
+E014,"Abbiamo ricevuto il decreto di accreditamento istituzionale n. 123 del 2026 ma la struttura risulta ancora non accreditata sul sistema, quindi non possiamo erogare prestazioni a carico SSR. Urgente.",Anagrafe delle Strutture,Accreditamento e convenzioni,0
+E015,"Vorremmo caricare il nuovo contratto di convenzione con la ASL per il laboratorio analisi, con i relativi budget annuali. Dove si inserisce?",Anagrafe delle Strutture,Accreditamento e convenzioni,0
+E016,Il centro dialisi di Viterbo ha cessato l'attività il 30/09. Vi chiediamo di disattivare la struttura dall'anagrafe a partire da quella data.,Anagrafe delle Strutture,Cessazione struttura,0
+E017,"Nuovo medico assunto (dott. Marco Neri, CF NREMRC85T10H501P) da inserire nell'anagrafe del personale sanitario con qualifica dirigente medico, presidio di Latina.",Personale Sanitario,Censimento operatore,0
+E018,Specializzando al 3° anno deve essere censito per poter operare nei reparti: come lo registriamo? Non è presente l'opzione tra le qualifiche.,Personale Sanitario,Censimento operatore,0
+E019,"Inoltro quanto ricevuto, vedete voi.
+
+---------- Messaggio inoltrato ----------
+Da: Ufficio Personale <personale@asl-esempio.it>
+Data: lun 5 ott 2026, 09:14
+Oggetto: R: R: Nuova assunzione
+
+Buongiorno, in allegato i dati del nuovo assunto Dott.ssa Anna Verdi, CF VRDNNA90C41H501B, infermiera, in servizio dal 15/10. Da inserire in anagrafica.
+Cordiali saluti
+
+--
+Dott.ssa Elena Marchetti
+Dirigente Amministrativo - U.O.C. Servizi Sanitari Territoriali
+Azienda Sanitaria Locale Roma 9
+Via delle Magnolie 21, 00100 Roma | Tel. 06 1234567 | Cell. 339 8765432
+email: elena.marchetti@asl-esempio.it
+
+AVVISO DI RISERVATEZZA: Il presente messaggio e gli eventuali allegati sono destinati esclusivamente al destinatario e possono contenere informazioni riservate. Se lo ha ricevuto per errore, lo cancelli e ne dia comunicazione al mittente (D.Lgs. 196/2003, Reg. UE 2016/679).",Personale Sanitario,Censimento operatore,1
+E020,Il dott. Gallo è stato trasferito dal presidio di Rieti all'ospedale di Terni dal 1 ottobre. Aggiornare la sede di assegnazione.,Personale Sanitario,Variazione incarico o sede,0
+E021,"Un MMG ha ridotto il massimale da 1500 a 1200 assistiti, il sistema non permette la modifica del campo. Può intervenire qualcuno?",Personale Sanitario,Variazione incarico o sede,0
+E022,Ho cambiato qualifica da CPS Infermiere a CPS Infermiere esperto; nell'elenco personale risulta ancora il vecchio inquadramento. Quando viene aggiornato?,Personale Sanitario,Variazione incarico o sede,0
+E023,L'infermiera Bruni Carla è andata in pensione dal 1/10. Chiediamo la chiusura del rapporto di lavoro nell'anagrafica del personale.,Personale Sanitario,Cessazione o sospensione,0
+E024,Il dott. Esposito è stato sospeso dall'albo per provvedimento disciplinare: dobbiamo sospendere la sua abilitazione professionale nel sistema fino a nuova comunicazione dell'Ordine.,Personale Sanitario,Cessazione o sospensione,1
+E025,Il farmaco con AIC 045678012 non risulta nel prontuario regionale nonostante sia stato inserito dall'AIFA in elenco a settembre. Potete aggiornarlo?,Farmaceutica,Prontuario e codici farmaco,0
+E026,Codice ATC errato per amoxicillina/ac. clavulanico nel catalogo farmaci: riporta J01CA04 invece di J01CR02.,Farmaceutica,Prontuario e codici farmaco,0
+E027,"Nuovo farmaco generico di fascia C da aggiungere al catalogo, comunico dati confezione: AIC 049120033, 20 cpr 10 mg.",Farmaceutica,Prontuario e codici farmaco,0
+E028,Il piano terapeutico del paziente (CF PRTLGU52L10H501W) in terapia con farmaco biologico è scaduto e il sistema non permette il rinnovo online. Il medico specialista è il dott. Sala.,Farmaceutica,Piani terapeutici e DPC,0
+E029,I farmacisti segnalano che la distribuzione per conto (DPC) dei farmaci per l'epatite C non è visibile nel portale DPC da lunedì.,Farmaceutica,Piani terapeutici e DPC,0
+E030,La farmacia Rossi non riesce a registrare la dispensazione di un farmaco in fascia A: errore 'quantità superiore al consentito'. Il cliente è in attesa.,Farmaceutica,Dispensazione e magazzino,0
+E031,"Magazzino farmaci ospedaliero: le giacenze a sistema non sono allineate ai movimenti di carico dello scorso mese, risultano quantità negative per tre prodotti.",Farmaceutica,Dispensazione e magazzino,0
+E032,Segnalazione di carenza: l'antibiotico pediatrico in sospensione orale non è disponibile in nessuna farmacia del distretto. Chiediamo di inserire l'alert di carenza nel sistema.,Farmaceutica,Dispensazione e magazzino,1
+E033,Il medico emette la ricetta dematerializzata ma il NRE non viene generato; il sistema resta in caricamento. Succede da stamattina a più colleghi.,Ricette,"Errore emissione, stato o visualizzazione",0
+E034,"I pazienti non vedono la ricetta sull'app, il promemoria risulta vuoto anche se la ricetta è stata emessa ieri.",Ricette,"Errore emissione, stato o visualizzazione",0
+E035,"salve non riesco a stampare il promemoria ricetta, schermo bianco quando clicco",Ricette,"Errore emissione, stato o visualizzazione",0
+E036,"La farmacia ha già dispensato il farmaco ma la ricetta risulta ancora 'aperta' nel nostro sistema, e il paziente la vede ancora utilizzabile. Credo sia un errore di stato.",Ricette,"Errore emissione, stato o visualizzazione",1
+E037,"Ho emesso per errore due ricette identiche per lo stesso paziente (CF BRNGNN66S10H501V), come annullo la seconda?",Ricette,Annullamento e rettifica,0
+E038,"Ricetta emessa con CF errato, serve rettificare dopo l'emissione ma il sistema non lo permette. Cosa devo fare?",Ricette,Annullamento e rettifica,0
+E039,"La ricetta per risonanza lombare è bloccata con messaggio 'appropriatezza non soddisfatta, codice RAO'. Il paziente ha dolore forte e urgenza. Si può sbloccare?",Ricette,Blocchi prescrittivi e regole,0
+E040,"Impossibile prescrivere il farmaco richiesto: il sistema segnala 'principio attivo sospeso da AIFA'. Il paziente è in terapia da anni, come devo comportarmi?",Ricette,Blocchi prescrittivi e regole,1
+E041,"Attivazione ADI per paziente 82enne dimesso ieri dall'ospedale, non riusciamo ad aprire la scheda di attivazione domiciliare: il pulsante è grigio.",Assistenza Territoriale,Assistenza domiciliare (ADI),0
+E042,"Gli accessi domiciliari degli infermieri non vengono registrati dall'app mobile ADI, restano 'in sospeso' da giorni.",Assistenza Territoriale,Assistenza domiciliare (ADI),0
+E043,Dobbiamo sospendere l'ADI di un paziente per ricovero ospedaliero ma non troviamo la funzione di sospensione temporanea.,Assistenza Territoriale,Assistenza domiciliare (ADI),0
+E044,Paziente in ADI: non riusciamo a registrare le visite perché il sistema dice 'assistito senza medico di base assegnato'. Cosa facciamo?,Assistenza Territoriale,Assistenza domiciliare (ADI),1
+E045,"Dobbiamo inserire un paziente diabetico nel PDTA diabete di tipo 2, ma non troviamo il percorso nell'elenco dei PDTA attivi.",Assistenza Territoriale,Presa in carico e cronicità,0
+E046,"Il piano assistenziale individuale non si salva, errore al terzo passaggio della compilazione ('campo obbligatorio mancante' ma sono tutti compilati).",Assistenza Territoriale,Presa in carico e cronicità,0
+E047,"La segnalazione di dimissione protetta dall'ospedale al distretto non arriva da due giorni, i pazienti rischiano di restare senza presa in carico.",Assistenza Territoriale,Presa in carico e cronicità,0
+E048,Domanda di ingresso in RSA per paziente non autosufficiente inserita il 3/10: nella graduatoria non compare la richiesta.,Assistenza Territoriale,Strutture residenziali e semiresidenziali,0
+E049,"Centro diurno Alzheimer: non riusciamo a registrare le presenze mensili degli ospiti, il modulo si chiude con errore.",Assistenza Territoriale,Strutture residenziali e semiresidenziali,0
+E050,"Salve, sto tentando di accedere al mio account ma la password non funziona. Richiedo un ripristino, grazie","Utente (accessi, credenziali, profili)",Reset password,0
+E051,"Password scaduta, il link di ripristino non arriva (ho controllato anche nella posta indesiderata). Utente: l.moretti","Utente (accessi, credenziali, profili)",Reset password,0
+E052,"Chiediamo l'abilitazione del profilo 'prescrittore' per la dott.ssa Elisa Longo, in servizio presso il distretto 4 dal 1° ottobre.","Utente (accessi, credenziali, profili)",Abilitazione profilo,0
+E053,Il collega appena assegnato deve avere un profilo di sola lettura sul modulo ADI. Potete configurarlo? Grazie,"Utente (accessi, credenziali, profili)",Abilitazione profilo,0
+E054,Il dipendente Paolo Gentile ha lasciato l'azienda il 30/09: disattivare la sua utenza.,"Utente (accessi, credenziali, profili)",Disattivazione utenza,0
+E055,URGENTE: sospettiamo che l'account di un operatore sia compromesso (accessi da IP stranieri). Bloccatelo subito.,"Utente (accessi, credenziali, profili)",Disattivazione utenza,1
+E056,Dopo aver fatto accesso con SPID il portale mi riporta alla pagina di login in continuazione. Ho provato con due browser.,"Utente (accessi, credenziali, profili)",Autenticazione e SPID,0
+E057,Non ricevo più il codice OTP via SMS perché ho cambiato numero (nuovo 347 1122334). Come posso aggiornarlo per entrare?,"Utente (accessi, credenziali, profili)",Autenticazione e SPID,0
+E058,"Salve, la vostra dashboard mostra 4 mln di euro spesi in farmaceutica mentre dal nostro conto economico ne risultano molti meno. Potreste verificare i dati prima di inviarli al ministero?",Flussi Informativi,Qualità e coerenza dei dati,1
+E059,Il numero di ricette emesse a settembre nella dashboard (120.000) non coincide con quello del nostro gestionale (95.000). Vorremmo capire prima della trasmissione per la rendicontazione.,Flussi Informativi,Qualità e coerenza dei dati,1
+E060,Nei dati dei ricoveri del terzo trimestre ci sono circa 300 record con diagnosi principale vuota. Vanno corretti prima dell'invio regionale?,Flussi Informativi,Qualità e coerenza dei dati,0
+E061,Il flusso NSIS di agosto è stato scartato dal Ministero con errore di tracciato. Allego il log di scarto.,Flussi Informativi,Invio e scarti flussi,0
+E062,"Il flusso SDO del secondo trimestre non risulta inviato, la scadenza è domani. Potete verificare lo stato?
+
+--
+Dott.ssa Elena Marchetti
+Dirigente Amministrativo - U.O.C. Servizi Sanitari Territoriali
+Azienda Sanitaria Locale Roma 9
+Via delle Magnolie 21, 00100 Roma | Tel. 06 1234567 | Cell. 339 8765432
+email: elena.marchetti@asl-esempio.it
+
+AVVISO DI RISERVATEZZA: Il presente messaggio e gli eventuali allegati sono destinati esclusivamente al destinatario e possono contenere informazioni riservate. Se lo ha ricevuto per errore, lo cancelli e ne dia comunicazione al mittente (D.Lgs. 196/2003, Reg. UE 2016/679).",Flussi Informativi,Invio e scarti flussi,1
+E063,Elevato numero di record scartati nel flusso specialistica ambulatoriale: il motivo è 'data prestazione antecedente alla data prescrizione'. Come procediamo con il reinvio?,Flussi Informativi,Invio e scarti flussi,0
+E064,"Il cruscotto delle liste d'attesa non si aggiorna da una settimana, mostra ancora i dati di inizio mese.",Flussi Informativi,Reportistica e dashboard,0
+E065,"Vorremmo un report mensile dei ricoveri per distretto, esportabile in Excel. È possibile averlo in dashboard?",Flussi Informativi,Reportistica e dashboard,0
+E066,non funziona niente,Da verificare,Da verificare,1
+E067,"Buongiorno, vi chiedo di richiamarmi appena possibile. Grazie.",Da verificare,Da verificare,1
+E068,"Auguri di buone feste a tutto il team IT, grazie per il lavoro di quest'anno!",Da verificare,Da verificare,1
+E069,"Inoltro quanto ricevuto, vedete voi.
+
+---------- Messaggio inoltrato ----------
+Da: Ufficio Personale <personale@asl-esempio.it>
+Data: lun 5 ott 2026, 09:14
+Oggetto: R: R: Nuova assunzione
+
+Vedi sotto, ditemi voi cosa fare.
+
+> Buongiorno, ho un problema con quella cosa che avevamo visto ieri, mi dite se si può sistemare? Grazie, Roberto
+
+--
+Dott.ssa Elena Marchetti
+Dirigente Amministrativo - U.O.C. Servizi Sanitari Territoriali
+Azienda Sanitaria Locale Roma 9
+Via delle Magnolie 21, 00100 Roma | Tel. 06 1234567 | Cell. 339 8765432
+email: elena.marchetti@asl-esempio.it
+
+AVVISO DI RISERVATEZZA: Il presente messaggio e gli eventuali allegati sono destinati esclusivamente al destinatario e possono contenere informazioni riservate. Se lo ha ricevuto per errore, lo cancelli e ne dia comunicazione al mittente (D.Lgs. 196/2003, Reg. UE 2016/679).",Da verificare,Da verificare,1

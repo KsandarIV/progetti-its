@@ -1,0 +1,43 @@
+id,email,categoria,pred_categoria,sottocategoria,pred_sottocategoria,pred_confidenza
+E001,"Buonasera, sto tentando di effettuare la scelta del medico di base per RSSMRA80A01H501U ma il sistema è bloccato. Restituisce un errore 'E542 - permessi insufficienti'. Potete controllare?",Anagrafe Assistiti,Da verificare,Scelta/revoca medico,Da verificare,0.0
+E002,"Gentili, la signora Bianchi Lucia (CF BNCLCU45C50H501Z) risulta ancora assegnata al dott. Verdi, deceduto lo scorso mese. Non riusciamo a revocare il medico per riassegnarne uno nuovo. Grazie.
+Segreteria Distretto 3",Anagrafe Assistiti,Da verificare,Scelta/revoca medico,Da verificare,0.0
+E003,"Il cognome di un assistito è stato registrato con un errore di battitura (Rosi invece di Rossi), CF RSSGNN72M10H501K. Come lo correggiamo? Il sistema non ci fa modificare il campo.",Anagrafe Assistiti,Da verificare,Variazione dati anagrafici,Da verificare,0.0
+E005,Un paziente straniero con permesso di soggiorno scaduto necessita di cure urgenti e chiede l'iscrizione al SSR con codice STP. Non troviamo la voce in anagrafe per inserirlo. Potete indicarci la procedura nel sistema?,Anagrafe Assistiti,Da verificare,Esenzioni e iscrizione SSR,Da verificare,0.0
+E007,Abbiamo individuato due schede per lo stesso assistito: una con CF RSSLRA60D45F205X e una con CF provvisorio. Chiediamo l'unificazione delle posizioni.,Anagrafe Assistiti,Da verificare,Duplicati e unificazione posizioni,Da verificare,0.0
+E008,"Buongiorno, scrivo per due cose. 1) Il sig. Ferri Paolo risulta con due posizioni anagrafiche (CF FRRPLA70B12H501Q e un codice provvisorio) e vorremmo unificarle. 2) Inoltre la mia password per il portale scade domani, mi servirà un ripristino. Grazie.
+
+--
+Dott.ssa Elena Marchetti
+Dirigente Amministrativo - U.O.C. Servizi Sanitari Territoriali
+Azienda Sanitaria Locale Roma 9
+Via delle Magnolie 21, 00100 Roma | Tel. 06 1234567 | Cell. 339 8765432
+email: elena.marchetti@asl-esempio.it
+
+AVVISO DI RISERVATEZZA: Il presente messaggio e gli eventuali allegati sono destinati esclusivamente al destinatario e possono contenere informazioni riservate. Se lo ha ricevuto per errore, lo cancelli e ne dia comunicazione al mittente (D.Lgs. 196/2003, Reg. UE 2016/679).",Anagrafe Assistiti,Da verificare,Duplicati e unificazione posizioni,Da verificare,0.0
+E009,"Apriamo un nuovo poliambulatorio privato a Latina (via Appia 100). Come lo inseriamo nell'anagrafe delle strutture? Abbiamo già il codice STS11, ci serve il resto della procedura.",Anagrafe delle Strutture,Da verificare,Censimento nuova struttura,Da verificare,0.0
+E019,"Inoltro quanto ricevuto, vedete voi.
+
+---------- Messaggio inoltrato ----------
+Da: Ufficio Personale <personale@asl-esempio.it>
+Data: lun 5 ott 2026, 09:14
+Oggetto: R: R: Nuova assunzione
+
+Buongiorno, in allegato i dati del nuovo assunto Dott.ssa Anna Verdi, CF VRDNNA90C41H501B, infermiera, in servizio dal 15/10. Da inserire in anagrafica.
+Cordiali saluti
+
+--
+Dott.ssa Elena Marchetti
+Dirigente Amministrativo - U.O.C. Servizi Sanitari Territoriali
+Azienda Sanitaria Locale Roma 9
+Via delle Magnolie 21, 00100 Roma | Tel. 06 1234567 | Cell. 339 8765432
+email: elena.marchetti@asl-esempio.it
+
+AVVISO DI RISERVATEZZA: Il presente messaggio e gli eventuali allegati sono destinati esclusivamente al destinatario e possono contenere informazioni riservate. Se lo ha ricevuto per errore, lo cancelli e ne dia comunicazione al mittente (D.Lgs. 196/2003, Reg. UE 2016/679).",Personale Sanitario,Da verificare,Censimento operatore,Da verificare,0.0
+E021,"Un MMG ha ridotto il massimale da 1500 a 1200 assistiti, il sistema non permette la modifica del campo. Può intervenire qualcuno?",Personale Sanitario,Anagrafe Assistiti,Variazione incarico o sede,Duplicati e unificazione posizioni,0.8
+E028,Il piano terapeutico del paziente (CF PRTLGU52L10H501W) in terapia con farmaco biologico è scaduto e il sistema non permette il rinnovo online. Il medico specialista è il dott. Sala.,Farmaceutica,Da verificare,Piani terapeutici e DPC,Da verificare,0.0
+E032,Segnalazione di carenza: l'antibiotico pediatrico in sospensione orale non è disponibile in nessuna farmacia del distretto. Chiediamo di inserire l'alert di carenza nel sistema.,Farmaceutica,Da verificare,Dispensazione e magazzino,Da verificare,0.0
+E043,Dobbiamo sospendere l'ADI di un paziente per ricovero ospedaliero ma non troviamo la funzione di sospensione temporanea.,Assistenza Territoriale,Da verificare,Assistenza domiciliare (ADI),Da verificare,0.0
+E045,"Dobbiamo inserire un paziente diabetico nel PDTA diabete di tipo 2, ma non troviamo il percorso nell'elenco dei PDTA attivi.",Assistenza Territoriale,Da verificare,Presa in carico e cronicità,Da verificare,0.0
+E051,"Password scaduta, il link di ripristino non arriva (ho controllato anche nella posta indesiderata). Utente: l.moretti","Utente (accessi, credenziali, profili)",Da verificare,Reset password,Da verificare,0.0
+E055,URGENTE: sospettiamo che l'account di un operatore sia compromesso (accessi da IP stranieri). Bloccatelo subito.,"Utente (accessi, credenziali, profili)",Da verificare,Disattivazione utenza,Da verificare,0.0
